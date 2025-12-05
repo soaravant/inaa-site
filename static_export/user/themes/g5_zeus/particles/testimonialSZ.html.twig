@@ -1,0 +1,84 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+
+<div class="sz-testimonial {{ particle.css.class }}">
+    <div class="g-grid">
+        <div class="g-block">
+            <div class="g-content">
+
+                {#MAINTITLE#}
+                {% if particle.maintitle %}
+                    <h2 class="sz-particles-title">{{ particle.maintitle|raw }}</h2>
+                {% endif %}
+
+                {#SUBTITLE#}
+                {% if particle.subtitle %}
+                    <div>
+                        <h3 class="sz-particles-subtitle">{{ particle.subtitle|raw }}</h3>
+                    </div>
+                {% endif %}                          
+                
+                {#DESCRIPTION#}
+                {% if particle.description %}
+                    <p class="sz-particles-description">{{ particle.description|raw }}</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    {# ITEMS #}
+    <div class="g-grid">
+        {% for item in particle.testimonials %}
+            <div class="g-block {{ field.class }} ">
+                <div class="g-content">
+
+                    <div class="
+                        {# apply image effects #}
+                        {% if item.effect == 'arrow' %} 
+                        	arrow 
+                        {% else %}
+                        	card
+                    	{% endif %}
+                    ">
+                    
+						<div class="sz-quote-container">
+	                        {#ICON#}
+	                        {% if item.icon %}  
+	                            <i class="{{ item.icon }} sz-icons"></i>
+	                        {% endif %}
+
+	                        {#QUOTE#}
+	                        {% if item.quote %}
+	                            <h4 class="sz-quote">{{ item.quote|raw }}</h4>
+	                        {% endif %}
+
+						</div>
+
+						<div class="sz-author-container">
+	                        {#IMAGE#}
+	                        {% if item.image %}
+	                            <img src="{{ url(item.image) }}" class="sz-img" alt="{{ item.name|e }}" />
+	                        {% endif %}
+
+
+	                        {#AUTHOR#}
+	                        {% if item.author %}
+	                            <h5>{{ item.author|raw }}</h5>
+			                        
+			                        {#AUTHOR ATTRIBUTE#}
+			                        {% if item.authorattribute %}
+			                            <div class="sz-author-attr">{{ item.authorattribute|raw }}</div>
+			                        {% endif %}
+	                        {% endif %}
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

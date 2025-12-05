@@ -1,0 +1,199 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% set attr_extra = particle.extra|attribute_array %}
+{% set article_settings = particle.article %}
+{% set filter = article_settings.filter %}
+{% set sort = article_settings.sort %}
+{% set limit = article_settings.limit %}
+{% set display = article_settings.display %}
+
+{# Category Finder  ############################}
+{% set category_options = filter.categories ? {id: [filter.categories|split(','), 0]} : {} %}
+{% set categories = joomla.finder('category', category_options).published(1).language().limit(0).find() %}
+
+{# Content Finder  ############################}
+{% if filter.articles %}
+    {% set article_options = filter.articles ? {id: [filter.articles|replace(' ', '')|split(',')]} : {} %}
+    {% set article_finder = joomla.finder('content', article_options).published(1).language() %}
+{% else %}
+    {% set article_finder = joomla.finder('content').category(categories).published(1).language() %}
+{% endif %}
+
+{% set featured = filter.featured|default('include') %}
+{% if featured == 'exclude' %}
+    {% do article_finder.featured(false) %}
+{% elseif featured == 'only' %}
+    {% do article_finder.featured(true) %}
+{% endif %}
+
+{% set start = limit.start + max(0, ajax.start|int) %}
+{% do article_finder.order(sort.orderby, sort.ordering).limit(limit.total).start(start) %}
+{% set total = article_finder.count() %}
+{% set articles = article_finder.find() %}
+
+{% block particle %}
+
+
+    {# PARTICLE TITLE #}
+    {% if particle.layout == 'List' or particle.layout == 'Two_column_list' %} 
+        {% if particle.maintitle %}
+                <h3 class="sz-featuredarticles-title">
+                    <span>{{ particle.maintitle|raw }}</span>
+                </h3>
+        {% endif %}
+        {% endif %}
+
+    {# All Articles  ############################}
+    {# CONTAINER #}
+    <div class="g-featuredarticles-sz sz-wrapper 
+        {% if particle.gutter == 'Yes' %} gutter {% endif %}
+        
+        {# TODO: CONFIGURE LAYOUTS #}
+        {% if particle.layout == 'Horizontal' %} horizontal 
+        {% elseif particle.layout == 'Vertical' %} vertical 
+        {% elseif particle.layout == 'Symmetry' %} symmetry 
+        {% elseif particle.layout == 'List' %} list one-column
+        {% elseif particle.layout == 'Two_column_list' %} list two-column
+        {% endif %}
+        
+        {% if particle.css.class %} 
+            {{ particle.css.class }}
+        {% endif %}" {{- attr_extra|raw }} 
+        
+        {#HEIGHT#}
+        {% if (particle.height) %}     
+            style='min-height:{{ particle.height }};'
+        {% endif %}
+    >
+
+
+        {% for article in articles  %}
+            <div class="g-grid sz-box 
+                {# classes for number of articles #}
+                {%  if limit.total == 5 %} five {% endif %}
+                {%  if limit.total == 4 %} four {% endif %}
+                {%  if limit.total == 3 %} three {% endif %}
+            ">
+                {% if display.image.enabled and article.images.image_intro or article.images.image_fulltext %}
+                    
+                    {#IMAGE ############################}
+                    {% if article.images.image_intro and display.image.enabled == 'intro' or display.image.enabled == 'show' %}
+                        <div class="g-block container"> {# the div closes #}
+                            <div class="sz-article-image">
+                                <a href="{{ article.route }}">
+                                    <div class="darken-pseudo">
+                                        <img src="{{ url(article.images.image_intro) }}" alt="{{ article.title }}"> 
+                                    </div>
+                                </a>
+                            </div>
+                    {% elseif article.images.image_fulltext and display.image.enabled == 'full' %}
+                        <div class="g-block">
+                            <div class="sz-article-image">
+                                <a href="{{ article.route }}">
+                                    <div class="darken-pseudo">
+                                        <img src="{{ url(article.images.image_fulltext) }}" alt="{{ article.title }}"> 
+                                    </div>
+                                </a>
+                            </div>
+                    {% endif %}
+                    
+                {#if no image available, show default.jpg image#}
+                {% else %}
+                                            
+                        <div class="g-block">
+                            <div class="sz-article-image">
+                                <a href="{{ article.route }}">
+                                    <div class="darken-pseudo">
+                                        <img src="{{ url('gantry-theme://images/default.jpg') }}"
+                                            alt="{{ article.title }}">
+                                    </div>
+                                </a>
+                            </div>
+                {% endif %}
+
+                            <div class="sz-content 
+                                {% if particle.overlay == 'Yes' %}
+                                    overlay
+                                {% endif %}
+                            ">
+
+                            {#META INFO#}
+                            {% if display.date.enabled or display.author.enabled or display.category.enabled or display.hits.enabled %}
+                                <div class="g-array-item-content">
+                                    
+                                    {#CATEGORY ############################}
+                                    {% if display.category.enabled %}
+                                        {% set category_link = display.category.enabled == 'link' %}
+                                        <span class="g-array-item-category label">
+                                            {% set cat = article.categories|last %}
+                                            {% if category_link %}
+                                                <a href="{{ cat.route }}">
+                                                    {{ cat.title }}
+                                                </a>
+                                            {% else %}
+                                                {{ cat.title }}
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
+                                        
+                                    {#DATE ############################}
+                                    {% if display.date.enabled %}
+                                        <span class="g-array-item-date">
+                                            {% if display.date.enabled == 'published' %}
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                {{ article.publish_up|date(display.date.format) }}
+                                            {% elseif display.date.enabled == 'modified' %}
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                {{ article.modified|date(display.date.format) }}
+                                            {% else %}
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                {{ article.created|date(display.date.format) }}
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
+                                        
+                                    {#AUTHOR ############################}
+                                    {% if display.author.enabled %}
+                                        <span class="g-array-item-author">
+                                            <i class="fa fa-user" aria-hidden="true"></i> {{ article.author.name }}
+                                        </span>
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
+
+                                    
+
+                                {#TITLE ############################}
+                                <div class="g-array-item-title">
+                                    <h2 class="g-item-title">
+                                        <a href="{{ article.route }}">{{ display.title.limit ? article.title|truncate_text(display.title.limit) : article.title }}</a>
+                                    </h2>
+                                </div>
+
+                                {# CONTENT #}
+                                {% if display.text.type %}
+                                    {% set article_text = display.text.type == 'intro' ? article.introtext : article.text %}
+                                    <div class="sz-article-text">
+                                        {% if display.text.formatting == 'text' %}
+                                            {{ article_text|truncate_text(display.text.limit)|raw }}
+                                        {% else %}
+                                            {{ article_text|truncate_html(display.text.limit)|raw }}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+
+                            </div> {# end sz-article-image sz-content #}
+                    
+                        </div>    {# end g-block #}
+                 
+            </div>  {# g-grid sz-box  #}
+            
+        {% endfor %}
+        {# END ARTICLe #}
+            
+    </div>
+    {# END LAYOUT STYLE #}
+ 
+{% endblock %}
+

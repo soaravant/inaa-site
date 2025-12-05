@@ -1,0 +1,56 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+    <div class="headlineSZ" >
+        <div class="g-grid">
+            <div class="g-block">
+                <div class="g-content">
+                    <div>
+                        {#HEADLINE#}
+                        {% if particle.maintitle %}
+                            {# TAG #}
+                            
+                            {% if particle.tag == 'h1' %} <h1 
+                            {% elseif particle.tag == 'h2' %} <h2 
+                            {% elseif particle.tag == 'h3' %} <h3 
+                            {% elseif particle.tag == 'h4' %} <h4 
+                            {% elseif particle.tag == 'h5' %} <h5 
+                            {% elseif particle.tag == 'h6' %} <h6 
+                            {% endif %}
+
+                            class="sz-headline-main"
+                            style="
+                                {% if particle.maintitlesize %} 
+                                    font-size: {{ particle.maintitlesize }};
+                                {% endif %}
+                                {% if particle.maintitlecolor %} 
+                                    color: {{ particle.maintitlecolor }};
+                                {% endif %}    
+
+                                {# ALIGNMENT #}
+                                {% if particle.maintitlealignment == 'left' %} text-align: left; 
+                                {% elseif particle.maintitlealignment == 'center' %} text-align: center; 
+                                {% elseif particle.maintitlealignment == 'right' %} text-align: right; 
+                                {% endif %}                                                            
+                            ">
+
+                                {{ particle.maintitle|raw }}
+                            
+                                {% if particle.tag == 'h1' %} </h1> 
+                                {% elseif particle.tag == 'h2' %} </h2> 
+                                {% elseif particle.tag == 'h3' %} </h3> 
+                                {% elseif particle.tag == 'h4' %} </h4> 
+                                {% elseif particle.tag == 'h5' %} </h5> 
+                                {% elseif particle.tag == 'h6' %} </h6> 
+                                {% endif %}
+                        {% endif %}
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

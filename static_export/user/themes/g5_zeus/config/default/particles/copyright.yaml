@@ -1,0 +1,11 @@
+enabled: '1'
+date:
+  start: '2018'
+  end: now
+owner: 'threethemes'
+link: 'https://threethemes.com'
+target: _blank
+additional:
+  text: 'Developed by threethemes.com'
+css:
+  class: ''

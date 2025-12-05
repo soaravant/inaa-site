@@ -1,0 +1,14 @@
+<?php
+return [
+    '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
+    'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/themes/g5_zeus/config/default/particles/totop.yaml',
+    'modified' => 1544978212,
+    'data' => [
+        'enabled' => '1',
+        'css' => [
+            'class' => ''
+        ],
+        'icon' => 'fa fa-chevron-up fa-fw',
+        'content' => 'Back to top'
+    ]
+];

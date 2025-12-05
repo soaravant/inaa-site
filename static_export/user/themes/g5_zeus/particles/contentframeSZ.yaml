@@ -1,0 +1,40 @@
+name: Content Frame
+description: Displays Content with image/icon
+type: particle
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable the particle.
+      default: true
+
+    image:
+      type: input.imagepicker
+      label: Image
+      description: Select the main image.
+      placeholder: Select an image
+
+    mainicon:
+      type: input.icon
+      label: Icon
+      description: Select the main icon
+      
+    maintitle:
+      type: input.text
+      label: Title
+      description: Customize the title text.
+      placeholder: Enter free text
+
+    subtitle:
+      type: input.text
+      label: Subtitle
+      description: Customize the subtitle text.
+      placeholder: Enter free text
+
+    description:
+      type: textarea.textarea
+      label: Description
+      description: Customize the description.
+      placeholder: Enter short description

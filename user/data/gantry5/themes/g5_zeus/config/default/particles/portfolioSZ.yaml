@@ -1,0 +1,10 @@
+enabled: '1'
+maintitle: ''
+subtitle: ''
+description: ''
+columns: grid3
+gutter: 'No'
+filterPortfolios: 'No'
+displayTags: 'No'
+displayImageOnly: 'No'
+portfolios: {  }

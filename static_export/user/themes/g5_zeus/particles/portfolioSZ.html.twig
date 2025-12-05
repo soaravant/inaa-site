@@ -1,0 +1,231 @@
+{% extends '@nucleus/partials/particle.html.twig' %} 
+{# NOTE: see script at the end of the file #}
+
+{#{% block stylesheets %}#}
+{#    {{ parent() }}#}
+    {#<link rel="stylesheet" href="{{ url('gantry-theme://xxx.min.css') }}" type="text/css"/>#}
+{#{% endblock %}#}
+
+{% block particle %}
+    <div class="portfolio-sz">
+        <div class="g-grid ">
+            <div class="g-block">
+                <div class="g-content">
+
+                    <div>
+                        {#MAINTITLE#}
+                        {% if particle.maintitle %}
+                            <h2 class="sz-particles-title">{{ particle.maintitle|raw }}</h2>
+                        {% endif %}
+
+                        {#SUBTITLE#}
+                        {% if particle.subtitle %}
+                            <div>
+                                <h3 class="sz-particles-subtitle">{{ particle.subtitle|raw }}</h3>
+                            </div>
+                        {% endif %}                          
+                        
+                        {#DESCRIPTION#}
+                        {% if particle.description %}
+                            <p class="sz-particles-description">{{ particle.description|raw }}</p>
+                        {% endif %}
+
+
+                        {# FILTER TAGS BUTTONS #}
+                        {# https://stackoverflow.com/questions/17788424/how-to-remove-duplicated-items-in-array-on-twig #}
+                        {% if particle.filterPortfolios == 'Yes' %}
+                            <div class="sz-filter-tags-wrapper">
+                            <button class="button button-outline button-filter-tags sz-filter-tags" href="" data-rel="all">All</button>
+                            
+                            {% set tagsUniqueArray = [] %}
+                            {% for portfolio in particle.portfolios %}
+                                {% for tag in portfolio.tags %}
+                                
+                                       {% if tag not in tagsUniqueArray %}
+                                            <button data-rel="{{ tag.text|raw }}"
+                                                    class="button button-outline button-filter-tags sz-filter-tags {{ tag.text|raw }}">
+                                                {{ tag.text|raw }}
+                                            </button>
+                                            {% set tagsUniqueArray = tagsUniqueArray|merge([tag]) %}
+                                       {% endif %}
+                                       
+                                {% endfor %}
+                             {% endfor %}
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        {# PORTFOLIOS #}
+        <div class="portfolio-sz-wrapper
+            {% if particle.gutter == 'Yes' %} 
+                 portfolio-sz-gutter 
+            {% endif %}
+            
+            {% if particle.columns == 'grid2'  %} 
+                portfolio-sz-2-column 
+            {% elseif particle.columns == 'grid3'  %} 
+                portfolio-sz-3-column 
+            {% elseif particle.columns == 'grid4'  %} 
+                portfolio-sz-4-column                 
+            {% endif %}
+        ">
+
+            {% for portfolio in particle.portfolios %}
+                <div class="g-grid portfolio-sz-item scale-effect all above slide-in 
+                                {% if portfolio.tags %}
+                                        {% for tag in portfolio.tags %}
+                                           {{ tag.text|raw }} 
+                                        {% endfor %}
+                                {% endif %}
+                ">
+                    <div class="g-block">
+
+                        <div class="portfolio-sz-image-container">
+                            {% if portfolio.image %}
+                                <div class="portfolio-sz-image">
+                                    <img 
+                                        src="{{ url('gantry-theme://images/default.jpg') }}"
+                                        data-src="{{ url(portfolio.image) }}" 
+                                        class="sz-lazy"
+                                        alt="{{portfolio.maintitle|default('')}}
+                                    "> 
+                                </div>
+                            {% endif %}
+
+                            <div class="portfolio-sz-container">
+                                  <div class="portfolio-sz-links">
+                                    {#BUTTONS-LINKS#}
+                                    {% if portfolio.linktext1 %}
+                                        <a href="{{ portfolio.link1|e }}" 
+                                            class="button {{ portfolio.linkstyle1|default('') }}" 
+                                            role="button">{{ portfolio.linktext1|e }}</a>
+                                    {% endif %}
+                                    {% if portfolio.linktext2 %}
+                                        <a href="{{ portfolio.link2|e }}" 
+                                            class="button {{ portfolio.linkstyle2|default('button-2') }}" 
+                                            role="button">{{ portfolio.linktext2|e }}</a>
+                                    {% endif %}
+                                    {% if portfolio.linktext3 %}
+                                        <a href="{{ portfolio.link3|e }}" 
+                                            class="button {{ portfolio.linkstyle3|default('button-outline') }}" 
+                                            role="button">{{ portfolio.linktext3|e }}</a>
+                                    {% endif %}                                 
+                                </div>
+                            </div>
+                            
+                        </div>
+                         
+                        {% if particle.displayImageOnly == 'No' %}
+                            <div class="portfolio-sz-content">
+                                {# TITLE #}
+                                {% if portfolio.maintitle %}
+                                    <div class="portfolio-sz-item-title">{{ portfolio.maintitle|raw }}</div>
+                                {% endif %}
+
+                                {# DESCRIPTION #}
+                                {% if portfolio.description %}
+                                    <div class="portfolio-sz-item-description">{{ portfolio.description|raw }}</div>
+                                {% endif %}                                
+
+                                {# TAGS #}
+                                {% if particle.displayTags == 'Yes' %}
+                                    {% if portfolio.tags %}
+                                        <div class="portfolio-sz-tags">
+                                            {% for tag in portfolio.tags %}
+                                                <span class="label">{{ tag.text|raw }} </span>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        lazyLoadImages()
+        function lazyLoadImages() {
+            console.log('starting lazy load');
+
+            // arrays are iterable, so forEach can be used, but not Objects
+            var lazyImages = [].slice.call(document.querySelectorAll('img[data-src].sz-lazy'));
+
+            if ('IntersectionObserver' in window) {
+                console.log('IntersectionObserver activated for lazy images');
+
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            console.log('IntersectionObserver changed src of lazy img: ' + lazyImage.dataset.src);
+
+                            lazyImage.classList.remove('sz-lazy');
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function (lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Possibly fall back to a more compatible method here
+                console.log('lazy load for images did not succeed');
+                var images = document.getElementsByTagName('img');
+                for(var i = 0; i < images.length ; i++) {
+                    images[i].src = images[i].dataset.src;
+                    console.log(' images src fell back to original: ' + images[i].dataset.src);
+                };
+                
+
+
+            }
+        }
+
+    </script>
+
+
+
+{% endblock %}
+
+
+{#IF TAG FILTERING IS ENABLED, LOAD JQUERY CDN ON FOOTER #}
+{% block javascript_footer %}
+	{% if particle.enabled %}
+	    {% if particle.filterPortfolios == 'Yes' %}
+		    {{ parent() }}
+
+            {% do gantry.load('jquery') %}
+            
+            <script>
+                var $j = jQuery.noConflict();
+                // $j is now an alias to the jQuery function; creating the new alias is optional.
+                // otherwise conflicts with contenttab
+
+                $j(function () {
+                    var selectedClass = "";
+                    var portfolio_wrapper = document.getElementsByClassName("portfolio-sz-wrapper");
+                    $j(".sz-filter-tags").click(function () {
+                        selectedClass = $j(this).attr("data-rel");
+                        $j(".portfolio-sz-wrapper").fadeTo(100, 0.1);
+                        $j(".portfolio-sz-item").not("." + selectedClass).fadeOut().removeClass('scale-effect');
+                        setTimeout(function () {
+                            $j("." + selectedClass).fadeIn().addClass('scale-effect');
+                            $j(".portfolio-sz-wrapper").fadeTo(300, 1);
+                        }, 300);
+            
+                    });
+                });
+            </script>
+
+            
+        {% endif %}
+	{% endif %}
+{% endblock %}

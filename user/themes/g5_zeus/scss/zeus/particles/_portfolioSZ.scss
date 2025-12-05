@@ -1,0 +1,155 @@
+.portfolio-sz {
+    text-align: center;
+    
+    // TODO: do i need lazy load css?
+    // smoothly display lazy load images
+    img.sz-lazy {
+        opacity: 1;
+        transition: opacity 0.3s;
+
+        &[data-src] {
+            opacity: 1; // change it to 0
+        }
+    }
+
+
+    .g-content{
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 1rem;
+
+    }
+    .portfolio-sz-title {
+        font-size: 3rem;
+        line-height: 120%;
+        font-weight: 800;
+        margin-bottom: 2rem;
+
+    }
+
+    .portfolio-sz-description, 
+    {
+        margin: 2rem 0;
+    }
+
+    // css grid
+        .portfolio-sz-wrapper {
+        display: grid;
+        height: 100%;
+        grid-template-rows: auto;
+
+        // typically min 48rem
+        @include breakpoint(no-mobile){
+            grid-template-columns: repeat(2, 1fr);
+            
+            &.portfolio-sz-2-column {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            &.portfolio-sz-3-column {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        
+            &.portfolio-sz-4-column {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            &.portfolio-sz-gutter {
+                grid-gap: 1.5rem;
+            }
+        }
+        
+    }
+
+
+
+    .portfolio-sz-content{
+        margin-bottom: 1rem;
+
+        .portfolio-sz-item-title {
+            font-size: 2rem;
+            line-height: 120%;
+            font-weight: 800;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .portfolio-sz-item-description {
+            margin: 2rem;
+        }
+
+        .portfolio-sz-tags {
+            margin: 0.5rem 0;
+        }
+
+    }
+    
+    
+    /*###### HOVER EFFECT ###############################*/
+    .above {
+        text-align: center;
+        cursor: default;
+        border: 1px solid #DEDEDE;
+        box-shadow: inset 0px 0 0px 1px white, 0 0 8px rgba(0, 0, 0, 0.1);
+
+        .portfolio-sz-image-container {
+            position: relative;
+            overflow: hidden;
+
+            img {
+                display: block;
+                position: relative;
+            }
+    
+            .portfolio-sz-container {
+                position: absolute;
+                overflow: hidden;
+                top: 0;
+                right:0; 
+                bottom: 0;
+                left: 0;    
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        // position: relative;
+
+        .button {
+            display: block;
+            margin: 1rem 0;
+        }
+
+
+    }
+
+    .slide-in {
+        .portfolio-sz-container{
+            opacity: 0;
+            background-color: darken($accent-color-3, 10%);
+            transition: all 0.4s ease-in-out;
+            // img {
+            //     transition: all 0.2s linear;
+            // }
+        }
+
+        &:hover {
+            // img {
+            //     transform: scale(1.1);
+            // }
+            .portfolio-sz-container {
+                opacity: 1;
+
+            }
+        }
+    }
+
+    .scale-anm {
+        transform: scale(1);
+        // display: none;
+    }
+
+   
+}

@@ -1,0 +1,90 @@
+<?php
+return [
+    '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
+    'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/themes/g5_zeus/particles/contactSZ.yaml',
+    'modified' => 1544979752,
+    'data' => [
+        'name' => 'Contact Info',
+        'description' => 'Displays Contact Info',
+        'type' => 'particle',
+        'icon' => 'fa fa-users',
+        'configuration' => [
+            'caching' => [
+                'type' => 'static'
+            ]
+        ],
+        'form' => [
+            'fields' => [
+                'enabled' => [
+                    'type' => 'input.checkbox',
+                    'label' => 'Enabled',
+                    'description' => 'Globally enable the particle.',
+                    'default' => true
+                ],
+                'maintitle' => [
+                    'type' => 'input.text',
+                    'label' => 'Title',
+                    'description' => 'Customize the title text.',
+                    'placeholder' => 'Enter free text'
+                ],
+                'style' => [
+                    'type' => 'select.selectize',
+                    'label' => 'Style',
+                    'description' => 'Select a style for the Particle',
+                    'default' => 'vertical',
+                    'options' => [
+                        'vertical' => 'Vertical',
+                        'horizontal' => 'Horizontal'
+                    ]
+                ],
+                'contactinfo' => [
+                    'type' => 'collection.list',
+                    'array' => true,
+                    'label' => 'Contact Items',
+                    'description' => 'Create each item to appear in the content row or column.',
+                    'value' => 'title',
+                    'ajax' => true,
+                    'fields' => [
+                        '.icon' => [
+                            'type' => 'input.icon',
+                            'label' => 'Icon'
+                        ],
+                        '.label' => [
+                            'type' => 'input.text',
+                            'label' => 'Label',
+                            'description' => 'Describe the kind of the Contact Info.',
+                            'placeholder' => 'eg Email'
+                        ],
+                        '.text' => [
+                            'type' => 'input.text',
+                            'label' => 'Description',
+                            'description' => 'Input the text for the Contact Info.',
+                            'placeholder' => 'eg support@threethemes.com'
+                        ],
+                        '.link' => [
+                            'type' => 'input.text',
+                            'label' => 'Link',
+                            'description' => 'Optional. Input the item link. Leave empty to display only the Contant. Examples mailto:support@threethemes.com https://threethemes.com/ tel:+123456789',
+                            'placeholder' => 'eg mailto:support@threethemes.com'
+                        ],
+                        '.linktarget' => [
+                            'type' => 'select.selectize',
+                            'label' => 'Link Target',
+                            'description' => 'Target browser window when item is clicked.',
+                            'placeholder' => 'Select...',
+                            'default' => '_self',
+                            'options' => [
+                                '_self' => 'Self',
+                                '_blank' => 'New Window'
+                            ]
+                        ],
+                        '.variations' => [
+                            'type' => 'input.block-variations',
+                            'label' => 'Variations'
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+];

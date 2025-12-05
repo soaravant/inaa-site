@@ -1,0 +1,180 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+
+    <div class="{{ particle.class|e }} custom-carousel-container">
+        {% if particle.title %}<h2 class="g-title">{{ particle.title|raw }}</h2>{% endif %}
+
+        <div id="g-custom-carousel-{{ id }}" class="custom-carousel-wrapper">
+            <button class="custom-carousel-nav prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <div class="custom-carousel-track">
+                {# Items will be injected here by JS #}
+            </div>
+            <button class="custom-carousel-nav next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript_footer %}
+    <script type="text/javascript">
+        (function() {
+            var carouselId = 'g-custom-carousel-{{ id }}';
+            var wrapper = document.getElementById(carouselId);
+            if (!wrapper) return;
+
+            var track = wrapper.querySelector('.custom-carousel-track');
+            var prevBtn = wrapper.querySelector('.prev');
+            var nextBtn = wrapper.querySelector('.next');
+
+            // Collect items data
+            var items = [
+                {% for item in particle.items %}
+                    {% if not item.disable %}
+                    {
+                        image: "{{ url(item.image)|e('js') }}",
+                        title: "{{ item.title|e('js') }}",
+                        desc: "{{ item.desc|e('js') }}",
+                        link: "{{ item.link|e('js') }}",
+                        linktext: "{{ item.linktext|e('js') }}"
+                    },
+                    {% endif %}
+                {% endfor %}
+            ];
+
+            if (items.length === 0) return;
+
+            // Configuration
+            var visibleItems = 4;
+            var totalItems = items.length;
+            var itemWidthPercent = 100 / visibleItems; // 25%
+
+            // We need clones at start and end for infinite loop.
+            // Clones at start: last 'visibleItems' items.
+            // Clones at end: first 'visibleItems' items.
+            // Actually, to be safe and smooth, let's clone 'visibleItems' amount.
+            
+            var clonesBefore = items.slice(-visibleItems);
+            var clonesAfter = items.slice(0, visibleItems);
+            
+            var allItems = clonesBefore.concat(items).concat(clonesAfter);
+            
+            // Render all items
+            allItems.forEach(function(data) {
+                var node = createItemNode(data);
+                node.style.flex = '0 0 ' + itemWidthPercent + '%';
+                node.style.width = itemWidthPercent + '%'; // Fallback
+                track.appendChild(node);
+            });
+
+            function createItemNode(data) {
+                var itemDiv = document.createElement('div');
+                itemDiv.className = 'custom-carousel-item';
+                
+                var imgDiv = document.createElement('div');
+                imgDiv.className = 'custom-carousel-img';
+                imgDiv.style.backgroundImage = 'url(' + data.image + ')';
+                
+                var contentDiv = document.createElement('div');
+                contentDiv.className = 'custom-carousel-content';
+                
+                if (data.title) {
+                    var title = document.createElement('h3');
+                    title.textContent = data.title;
+                    contentDiv.appendChild(title);
+                }
+                
+                itemDiv.appendChild(imgDiv);
+                itemDiv.appendChild(contentDiv);
+                
+                return itemDiv;
+            }
+
+            // State
+            // Index 0 corresponds to the first REAL item.
+            // The track has 'visibleItems' clones at the start.
+            // So the initial offset index is 'visibleItems'.
+            var currentIndex = 0; 
+            var offsetIndex = visibleItems; 
+            var isAnimating = false;
+
+            function updateTransform(enableTransition) {
+                if (enableTransition) {
+                    track.style.transition = 'transform 0.5s ease';
+                } else {
+                    track.style.transition = 'none';
+                }
+                
+                var percentTranslate = -(offsetIndex * itemWidthPercent);
+                track.style.transform = 'translateX(' + percentTranslate + '%)';
+            }
+
+            // Initial Position
+            updateTransform(false);
+
+            function moveNext() {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                offsetIndex++;
+                updateTransform(true);
+                
+                setTimeout(function() {
+                    // Check if we reached the end clones
+                    // The real items end at index: visibleItems + totalItems - 1
+                    // The first clone after real items is at: visibleItems + totalItems
+                    if (offsetIndex >= visibleItems + totalItems) {
+                        // Jump back to start of real items
+                        offsetIndex = visibleItems;
+                        updateTransform(false);
+                    }
+                    isAnimating = false;
+                }, 500);
+            }
+
+            function movePrev() {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                offsetIndex--;
+                updateTransform(true);
+                
+                setTimeout(function() {
+                    // Check if we reached the start clones
+                    // The real items start at index: visibleItems
+                    // The last clone before real items is at: visibleItems - 1
+                    if (offsetIndex < visibleItems) {
+                        // Jump to end of real items
+                        // The last real item is at: visibleItems + totalItems - 1
+                        // We want to show the set ending at the last real item.
+                        // Actually, if we are at index 'visibleItems - 1' (which is the last item of the 'before' clones),
+                        // it corresponds to the last item of the real list.
+                        // So we should jump to: visibleItems + totalItems - 1
+                        
+                        // Wait, if offsetIndex is the START of the view.
+                        // If offsetIndex becomes visibleItems - 1.
+                        // That means we are viewing [CloneLast, Item1, Item2, Item3].
+                        // We want to jump to [ItemLast, Item1, Item2, Item3] ?? No.
+                        // We want to jump to the position where ItemLast is the first visible item?
+                        // No, 'clonesBefore' are the LAST items.
+                        // So clonesBefore[0] is items[totalItems - visibleItems].
+                        // clonesBefore[last] is items[totalItems - 1].
+                        
+                        // If offsetIndex drops below visibleItems (e.g. visibleItems - 1),
+                        // We are looking at the last clone.
+                        // We should jump to the corresponding real item position.
+                        // The real item corresponding to (visibleItems - 1) is (visibleItems + totalItems - 1).
+                        
+                        offsetIndex = offsetIndex + totalItems;
+                        updateTransform(false);
+                    }
+                    isAnimating = false;
+                }, 500);
+            }
+
+            nextBtn.addEventListener('click', moveNext);
+            prevBtn.addEventListener('click', movePrev);
+
+        })();
+    </script>
+{% endblock %}

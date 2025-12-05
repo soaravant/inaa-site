@@ -1,0 +1,217 @@
+name: Section
+description: Layout section.
+type: section
+
+form:
+  fields:
+
+    _tabs:
+      type: container.tabs
+      fields:
+
+        _tab_main:
+          label: Main
+          fields:   
+
+            .boxed:
+              type: select.selectize
+              label: Layout
+              description: Select the Layout container behavior. 'Inherit' refers to Page Settings.
+              isset: true
+              selectize:
+                allowEmptyOption: true
+              options:
+                '': Inherit from Page Settings
+                0: Fullwidth (Boxed Content)
+                2: Fullwidth (Flushed Content)
+                1: Boxed
+                3: Remove Container
+
+            .class:
+              type: input.selectize
+              label: CSS Classes
+              description: Enter CSS class names.
+              default:
+
+            .extra:
+              type: collection.keyvalue
+              label: Tag Attributes
+              description: Extra Tag attributes.
+              key_placeholder: Key (data-*, style, ...)
+              value_placeholder: Value
+              exclude: ['id', 'class']
+
+
+        _tab_background:
+          label: Background
+          fields:    
+
+
+            .background:
+              type: input.imagepicker
+              label: Image
+              description: Set the background image. If left empty, it will take the color from the Styles-tab related section.
+              default: ''
+
+            .backgroundOverlay:
+              type: input.colorpicker
+              label: Overlay
+              description: Set the color of the Background overlay in order to darken/lighten the image. Use rgba(0, 0, 0, 0) to display the image unmodified.
+              default: "rgba(0, 0, 0, 0)"
+
+            .backgroundAttachment:
+              type: select.selectize
+              label: Attachment
+              description: Set whether a background image is fixed or scrolls with the rest of the page.
+              default: ''
+              options:
+                '': Select a value
+                scroll: Scroll
+                fixed: Fixed
+                local: Local
+                initial: Initial
+                inherit: Inherit
+
+            .backgroundRepeat:
+              type: select.selectize
+              label: Repeat
+              description: Set if/how a background image will be repeated. By default, a background-image is repeated both vertically and horizontally. If no background-position is specified, the image is always placed at the element's top left corner.
+              default: ''
+              options:
+                '': Select a value
+                repeat: repeat
+                repeat-x: repeat-x
+                repeat-y: repeat-y
+                no-repeat: no-repeat
+                initial: initial
+                inherit: Inherit
+
+            .backgroundPosition:
+              type: select.selectize
+              label: Position
+              description: Set the starting position of a background image. By default, a background-image is placed at the top-left corner of an element.
+              default: ''
+              options:
+                '': Select a value
+                left top: left top
+                left center: left center
+                left bottom: left bottom
+                right top: right top
+                right center: right center
+                right bottom: right bottom
+                center top: center top
+                center center: center center
+                center bottom: center bottom
+                initial: Initial
+                inherit: Inherit
+
+            .backgroundSize:
+              type: select.selectize
+              label: Size
+              description: Specify the size of a background image.
+              default: ''
+              options:
+                '': Select a value
+                auto: auto
+                cover: cover
+                contain: contain
+                initial: Initial
+                inherit: Inherit
+
+        _tab_padding:
+          label: Padding
+          fields: 
+
+            .paddingTop:
+              type: input.text
+              label: Top
+              description: Optional - Specify the top padding of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .paddingBottom:
+              type: input.text
+              label: Bottom
+              description: Optional - Specify the Bottom padding of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .paddingLeft:
+              type: input.text
+              label: Left
+              description: Optional - Specify the Left padding of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .paddingRight:
+              type: input.text
+              label: Right
+              description: Optional - Specify the Right padding of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '\d+(\.\d+){0,1}(rem|em|px)'
+
+        _tab_margin:
+          label: Margin
+          fields: 
+
+            _info:
+              type: separator.note
+              class: alert alert-info
+              content: Negative values are allowed, eg -50px
+
+
+            .marginTop:
+              type: input.text
+              label: Top
+              description: Optional - Specify the top margin of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '-?\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .marginBottom:
+              type: input.text
+              label: Bottom
+              description: Optional - Specify the Bottom margin of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '-?\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .marginLeft:
+              type: input.text
+              label: Left
+              description: Optional - Specify the Left margin of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '-?\d+(\.\d+){0,1}(rem|em|px)'
+
+
+            .marginRight:
+              type: input.text
+              label: Right
+              description: Optional - Specify the Right margin of the block in rem, em or px units.      
+              placeholder: eg 2rem 
+              pattern: '-?\d+(\.\d+){0,1}(rem|em|px)'
+
+        _tab_height:
+          label: Height
+          fields: 
+
+            _info:
+              type: separator.note
+              class: alert alert-info
+              content: Specify the minimum height of the block <br />Use 100vh to make the background fit the window size, <br /> 50vh for the half window etc 
+
+
+            .blockHeight:
+              type: input.text
+              label: Height
+              description: Optional - Specify the height of the block in vh, vw, rem, em or px units.      
+              placeholder: eg 100vh 
+              pattern: '-?\d+(\.\d+){0,1}(rem|em|px|vh|vw)'
+
+
+
+    _inherit:
+      type: gantry.inherit

@@ -1,0 +1,9 @@
+version: '1.2'
+timestamp: 1665568992
+count: 1
+index:
+  admin:
+    storage_key: admin
+    storage_timestamp: 1602584278
+    key: admin
+    email: efthimisgeo@protonmail.com

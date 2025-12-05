@@ -1,0 +1,13 @@
+.sz-calltoactionSZ {
+    // TODO: mobile only block     
+
+    .button {
+        text-align: center;
+        
+        @include breakpoint(mobile-only) {
+            display: block;
+        }
+    }
+
+
+}

@@ -1,0 +1,92 @@
+name: Call to action
+description: Displays Call to action buttons  
+type: particle
+icon: fa-long-arrow-right
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable the particle.
+      default: true
+
+    _tabs:
+      type: container.tabs
+      fields:
+
+        _tab_link1:
+          label: Link 1
+          fields:    
+            .link1:
+              type: input.text
+              label: Address (href)
+              description: Specify the link address.
+
+            .linktext1:
+              type: input.text
+              label: Text
+              description: Customize the link text.
+
+            .linkstyle1:
+              type: select.select
+              label: Style
+              description: 'Select a button style. These are button classes'
+              default: primary
+              options:
+                '' : primary
+                button-2: secondary
+                button-outline: outline
+
+        _tab_link2:
+          label: Link 2
+          fields:          
+
+            link2:
+              type: input.text
+              label: Address (href)
+              description: Specify the link address.
+
+            linktext2:
+              type: input.text
+              label: Text
+              description: Customize the link text.
+
+            linkstyle2:
+              type: select.select
+              label: Style
+              description: 'Select a button style. These are button classes'
+              default: secondary
+              options:
+                '' : primary
+                button-2: secondary
+                button-outline: outline
+
+        _tab_link3:
+          label: Link 3
+          fields:          
+
+            link3:
+              type: input.text
+              label: Address (href)
+              description: Specify the link address.
+
+            linktext3:
+              type: input.text
+              label: Text
+              description: Customize the link text.
+
+            linkstyle3:
+              type: select.select
+              label: Style
+              description: 'Select a button style. These are button classes'
+              default: outline
+              options:
+                '' : primary
+                button-2: secondary
+                button-outline: outline        
+
+    _info:
+      type: separator.note
+      class: alert alert-info
+      content: Colors are configured according to Section Preset Styles in Style tab and the corresponding section .scss file

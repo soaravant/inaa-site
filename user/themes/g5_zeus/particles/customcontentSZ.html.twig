@@ -1,0 +1,151 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+    <div class="sz-customcontentSZ" >
+        <div class="g-grid" >
+            <div class="g-block">
+                <div class="g-content">
+                    <div 
+                        {#HEIGHT#}
+                        {% if (particle.height or particle.textalign) %}     
+                            style='
+                                {% if particle.height %}
+                                    min-height: {{ particle.height }};
+                                {% endif %}
+                                
+                                {% if particle.textalign %}
+                                    text-align: {{ particle.textalign }};
+                                {% endif %}
+                            '
+                        {% endif %}
+                            >
+                        {#IMAGE#}
+                        {% if particle.image %}
+                            <img src="{{ url('gantry-theme://images/default.jpg') }}"
+                                data-src="{{ url(particle.image) }}" 
+                                alt="{{ particle.maintitle|e }}" 
+                                class="sz-lazy"
+                                />
+                        {% endif %}
+                        
+                        {#ICON#}
+                        {% if particle.mainicon %}  
+                            <div>
+                                <i class="{{ particle.mainicon }} sz-customcontent-icons" 
+                                    style="display:block; 
+                                    {% if particle.textalign %} 
+                                        text-align: {{ particle.textalign }}
+                                    {% endif %}
+                                ">
+                                </i>
+                            </div>
+                        {% endif %}
+                        
+                        {#TITLE#}
+                        {% if particle.maintitle %}
+                            <div>
+                                <div class="sz-particles-title" 
+                                    style="
+                                        {% if particle.textalign %} 
+                                            text-align: {{ particle.textalign }}
+                                        {% endif %}
+                                    "
+                                >
+                                    {{ particle.maintitle|raw }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {#SUBTITLE#}
+                        {% if particle.subtitle %}
+                            <div>
+                                <div class="sz-particles-subtitle"
+                                    style="
+                                        {% if particle.textalign %} 
+                                            text-align: {{ particle.textalign }}
+                                        {% endif %}
+                                    "
+                                >
+                                {{ particle.subtitle|raw }}</div>
+                            </div>
+                        {% endif %}                        
+                        
+                        {#DESCRIPTION#}
+                        {% if particle.description %}
+                            <p class="sz-particles-description"
+                                style="
+                                    {% if particle.textalign %} 
+                                        text-align: {{ particle.textalign }}
+                                    {% endif %}
+                                "
+                            >
+                                {{ particle.description|raw }}
+                            </p>
+                        {% endif %}
+                        
+                        {#BUTTONS-LINKS#}
+                        {% if particle.linktext %}
+                            <a href="{{ particle.link|e }}" class="button {{ particle.linkstyle|default('') }}" role="button">{{ particle.linktext|e }}</a>
+                        {% endif %}
+                        {% if particle.linktext2 %}
+                            <a href="{{ particle.link2|e }}" class="button {{ particle.linkstyle2|default('') }}" role="button">{{ particle.linktext2|e }}</a>
+                        {% endif %}
+                        {% if particle.linktext3 %}
+                            <a href="{{ particle.link3|e }}" class="button {{ particle.linkstyle3|default('') }}" role="button">{{ particle.linktext3|e }}</a>
+                        {% endif %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-grid sz-customcontent-subitem">
+            {% for subitem in particle.subitems %}
+                <div class="g-block {{ subitem.class }}">
+                    <div class="g-content">
+                        <i class="{{ subitem.icon }} subitem-icons"></i>
+                        <h2 class="sz-subitem-title">{{ subitem.title|raw }}</h2>
+                        <h3 class="sz-subitem-subtitle">{{ subitem.subtitle|raw }}</h3>
+                        <p>{{ subitem.description|raw }}</p>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script>
+        lazyLoadImages()
+        function lazyLoadImages() {
+            console.log('starting custom content lazy load');
+
+            // arrays are iterable, so forEach can be used, but not Objects
+            var lazyImages = [].slice.call(document.querySelectorAll('img[data-src].sz-lazy'));
+
+            if ('IntersectionObserver' in window) {
+                console.log('IntersectionObserver activated for custom content lazy images');
+
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            console.log('IntersectionObserver changed src of lazy img: ' + lazyImage.dataset.src);
+
+                            lazyImage.classList.remove('sz-lazy');
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function (lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Possibly fall back to a more compatible method here
+                console.log('lazy load for images did not succeed');
+            }
+        }
+
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,184 @@
+.timelineSZ {
+
+    .sz-timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        // the vertical line
+        &:after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: $accent-color-2 ; //TODO: use accent conditionally
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            }
+    
+        .container {
+            position: relative;
+            width: 50%;
+            
+            /* The circles on the timeline */
+            &:after {
+                content: '';
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                top: 15px;
+                right: -13px;
+                background-color: $accent-color-2; //TODO: use accent conditionally
+                border: 4px solid #FF9F55; //TODO: use accent conditionally
+                border-radius: 50%;
+                z-index: 1;
+                
+                &:right {
+                    color: red;
+                }
+                
+            }
+            
+
+    
+            /* Place the container left and right */
+            &.left {
+                left: 0;
+                
+                /* arrow point right */
+                &:before {
+                    content: " ";
+                    height: 0;
+                    position: absolute;
+                    top: 17px;
+                    width: 0;
+                    z-index: 1;
+                    right: 30px;
+                    border: medium solid $accent-color-2    ;
+                    border-width: 10px 0 10px 10px;
+                    border-color: transparent transparent transparent $accent-color-2    ;
+                }
+            }
+            
+            &.right {
+                left: 50%;
+                
+                // arrow point left
+                &:before {
+                    content: " ";
+                    height: 0;
+                    position: absolute;
+                    top: 17px;
+                    width: 0;
+                    z-index: 1;
+                    left: 30px;
+                    border: medium solid $accent-color-2 ; //TODO: use accent color
+                    border-width: 10px 10px 10px 0;
+                    border-color: transparent $accent-color-2 transparent transparent; //TODO: use accent color
+                }
+                
+                // circle
+                &:after {
+                    left: -13px;
+                }
+            }
+            
+            .content {
+                padding: 20px 30px;
+                margin: 40px;
+                background-color: $accent-color-2;
+                position: relative;
+                border-radius: 6px;
+            }            
+                    
+        }
+        
+    }
+
+
+    
+    // .sz-timeline-description {
+    //     padding: 1.5rem 0;
+        
+    //     @include breakpoint(mobile-only) {
+    //         padding: 0.5rem 0;    
+    //     }
+        
+    //     @include breakpoint(small-mobile-range) {
+    //         padding: 0.5rem 0;    
+    //     }
+    // }
+
+    @include breakpoint(mobile-only) {
+        // width: 100%;
+            
+        /* Place the timelime to the left */
+        .sz-timeline {
+            
+            &:after {
+                left: 31px;
+            }
+            
+            /* Full-width containers */
+            .container {
+                width: 100%;
+                padding-left: 30px;
+
+                &.left {
+                    // arrow point left
+                    &:before {
+                        left: 60px;
+                        border: medium solid white; //TODO: use accent color
+                        border-width: 10px 10px 10px 0;
+                        border-color: transparent white transparent transparent; //TODO: use accent color
+                    }
+                    
+                    // circle
+                    &:after {
+                        left: 18px;
+                    }
+                }
+
+                &.right {
+                    /* Make all right containers behave like the left ones */
+                    left: 0%;
+                    
+                    // circle
+                    &:after {
+                        left: 18px;
+                    }
+                    
+                    // arrow
+                    &:before {
+                        left: 60px;
+                    }                    
+                }                
+            }  
+        }
+          
+    }
+
+    @include breakpoint(small-mobile-range) {
+        width: 100%;
+    }
+    
+
+    .sz-timeline-eventDate {
+        font-size: $core-font-size+2;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+    .sz-timeline-eventTitle {
+        font-size: $core-font-size+1;
+        font-weight: 600;
+    }
+    .sz-timeline-eventSubtitle {
+        font-size: $core-font-size+0.4;
+        // font-weight: 800;
+    }
+    .sz-timeline-eventDescription {
+        
+    }
+
+}

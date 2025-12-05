@@ -1,0 +1,31 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+    <div class="sz-calltoactionSZ" >
+        <div class="g-grid">
+            <div class="g-block">
+                <div class="g-content">
+                    <div class="calltoactionSZ-buttons">
+                        {#BUTTONS-LINKS#}
+                        {% if particle.linktext1 %}
+                            <a href="{{ particle.link1|e }}" 
+                                class="button {{ particle.linkstyle1|default('') }}" 
+                                role="button">{{ particle.linktext1|e }}</a>
+                        {% endif %}
+                        {% if particle.linktext2 %}
+                            <a href="{{ particle.link2|e }}" 
+                                class="button {{ particle.linkstyle2|default('button-2') }}" 
+                                role="button">{{ particle.linktext2|e }}</a>
+                        {% endif %}
+                        {% if particle.linktext3 %}
+                            <a href="{{ particle.link3|e }}" 
+                                class="button {{ particle.linkstyle3|default('button-outline') }}" 
+                                role="button">{{ particle.linktext3|e }}</a>
+                        {% endif %} 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}

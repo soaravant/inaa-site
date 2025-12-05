@@ -1,0 +1,54 @@
+name: Headline
+description: Create Custom headline  
+type: particle
+icon: fa-header
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable the particle.
+      default: true
+
+    maintitle:
+      type: input.text
+      label: Title
+      description: The main headline
+      placeholder: Enter free text
+
+    tag:
+      type: input.radios
+      label: Tag
+      description: 'Set the tag for the headline. Default is h2'
+      default: h2
+      options:
+        h1: h1
+        h2: h2
+        h3: h3
+        h4: h4
+        h5: h5
+        h6: h6                
+
+    maintitlesize:
+      type: input.text
+      label: Size
+      description: Optional - Specify the font size of the title in rem, em or px units. 
+      placeholder: eg 2.5rem
+      pattern: '\d+(\.\d+){0,1}(rem|em|ex|ch|vw|vh|vmin|vmax|%|px|cm|mm|in|pt|pc)'
+
+    maintitlecolor:
+      type: input.colorpicker
+      label: Color
+      description: Optional - Set the color of the title.
+
+
+    maintitlealignment:
+      type: input.radios
+      label: Alignment
+      description: Optional - Align the line
+      default: left
+      options:
+        left: Left
+        center: Center
+        right: Right

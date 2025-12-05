@@ -1,0 +1,217 @@
+name: Portfolio
+description: Displays a group of images
+type: particle
+icon: fa-image
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable the particle.
+      default: true
+
+    maintitle:
+      type: input.text
+      label: Main title
+      description: Give a general title for the portfolio
+      placeholder: Enter free text
+
+    subtitle:
+      type: input.text
+      label: Subtitle
+      description: Customize the subtitle text.
+      placeholder: Enter free text
+
+    description:
+      type: textarea.textarea
+      label: Description
+      description: Describe what this portfolio is about.
+      placeholder: Enter short description for the portfolio
+
+    columns:
+      type: select.selectize
+      label: Columns
+      description: Select how many columns the portfolio should have
+      placeholder: 'Select...'
+      default: grid3
+      options:
+        grid4: '4 equal columns'
+        grid3: '3 equal columns'
+        grid2: '2 equal columns'
+
+    gutter:
+      type: input.radios
+      label: 'Use Gutter between items?'
+      description: Apply gutter between portfolios
+      default: No
+      options:
+        Yes: Yes
+        No: No
+
+    filterPortfolios:
+      type: input.radios
+      label: 'Allow Filter by Tag?'
+      description: Displays buttons to filter portfolios based on their tags. Loads JQuery CDN on footer
+      default: No
+      options:
+        Yes: Yes
+        No: No
+
+    displayTags:
+      type: input.radios
+      label: 'Display tags on each item?'
+      description: Select whether tags should display on each item. It does not affect filtering
+      default: No
+      options:
+        Yes: Yes
+        No: No        
+
+    displayImageOnly:
+      type: input.radios
+      label: 'Display image only?'
+      description: Display only image, hide the text content
+      default: No
+      options:
+        Yes: Yes
+        No: No 
+
+    portfolios:
+      type: collection.list
+      array: true
+      label: Portfolios
+      description: Create each portfolio to appear in the content row.
+      value: title
+      ajax: true
+
+      fields:
+        _tabs:
+          type: container.tabs
+          fields:
+          
+            _tab_main:
+              label: Main
+              fields:
+                .image:
+                  type: input.imagepicker
+                  label: Image
+                  description: Select the main image.
+        
+                .maintitle:
+                  type: input.text
+                  label: Title
+                  description: Customize the headline text.
+                  placeholder: Enter title
+        
+                .description:
+                  type: textarea.textarea
+                  label: Description
+                  description: Customize the description.
+                  placeholder: Enter short description
+        
+                .tags:
+                  type: collection.list
+                  array: true
+                  label: Tags
+                  description: Assign tags to portfolios. Tags are used for filtering portfolios
+                  value: text
+                  ajax: true
+        
+                  fields:
+                    .text:
+                      type: input.text
+                      label: Tag Text
+                      description: Input the text to be used as tag.        
+            
+            _tab_link1:
+              label: Link 1
+              fields:        
+                .link1:
+                  type: input.text
+                  label: Link 1
+                  description: Specify the link address.
+        
+                .linktext1:
+                  type: input.text
+                  label: Link 1 Text
+                  description: Customize the link text.
+        
+                .linkstyle1:
+                  type: select.select
+                  label: Link 1 style
+                  description: 'Select a button style. These are button classes'
+                  default: ''
+                  options:
+                    '' : primary
+                    button-2: secondary
+                    button-outline: outline
+                    button-block: block
+                    button-xlarge: xlarge
+                    button-large: large
+                    button-small: small
+                    button-xsmall: xsmall
+                    button-gradient: gradient
+                    button-bevel: bevel
+                    button-square: square            
+            
+            _tab_link2:
+              label: Link 2
+              fields:          
+                .link2:
+                  type: input.text
+                  label: Link 2
+                  description: Specify the link address.
+        
+                .linktext2:
+                  type: input.text
+                  label: Link 2 Text
+                  description: Customize the link text.
+        
+                .linkstyle2:
+                  type: select.select
+                  label: Link 2 style
+                  description: 'Select a button style. These are button classes'
+                  default: secondary
+                  options:
+                    '' : primary
+                    button-2: secondary
+                    button-outline: outline
+                    button-block: block
+                    button-xlarge: xlarge
+                    button-large: large
+                    button-small: small
+                    button-xsmall: xsmall
+                    button-gradient: gradient
+                    button-bevel: bevel
+                    button-square: square 
+            
+            _tab_link3:
+              label: Link 3
+              fields:          
+                .link3:
+                  type: input.text
+                  label: Link 3
+                  description: Specify the link address.
+        
+                .linktext3:
+                  type: input.text
+                  label: Link 3 Text
+                  description: Customize the link text.         
+                
+                .linkstyle3:
+                  type: select.select
+                  label: Link 3 style
+                  description: 'Select a button style. These are button classes'
+                  default: outline
+                  options:
+                    '' : primary
+                    button-2: secondary
+                    button-outline: outline
+                    button-block: block
+                    button-xlarge: xlarge
+                    button-large: large
+                    button-small: small
+                    button-xsmall: xsmall
+                    button-gradient: gradient
+                    button-bevel: bevel
+                    button-square: square            

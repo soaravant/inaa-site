@@ -1,0 +1,28 @@
+.sz-contentframeSZ {
+    
+    @include breakpoint(mobile-only){
+        text-align: center;
+    }   
+    
+    .sz-contentframeSZ-title {
+        font-size: $core-font-size+1.5;
+        font-weight: 800;
+        
+    }
+    
+    .sz-contentframeSZ-subtitle {
+        font-size: $core-font-size+1;
+        font-weight: 700;
+          
+    }
+
+    .sz-contentframeSZ-description {
+        text-align: justify;
+    }
+    
+    img,
+    button,
+    .sz-contentframeSZ-icons {
+        margin-bottom: 1rem;
+    }
+}

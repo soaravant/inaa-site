@@ -1,0 +1,126 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block javascript_footer %}
+	{% if particle.enabled %}
+		    {{ parent() }}
+        {#  
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
+            crossorigin="anonymous">
+        </script>
+
+        <script src="{{ url('gantry-theme://particles/semanticui/visibility.min.js') }}"
+            type="text/javascript"></script>
+        #}
+
+        
+            
+	{% endif %}
+{% endblock %}
+
+
+{% block particle %}
+
+    <div class="skillbarSZ" >
+        <div class="g-grid">
+            
+            <div class="g-block">
+                <div class="g-content">
+                    <div>
+                        {#HEADLINE#}
+                        {% if particle.maintitle %}
+                            <h2 class="sz-particles-title">{{ particle.maintitle|raw }}</h2>
+                        {% endif %}
+
+                        {#SUBTITLE#}
+                        {% if particle.subtitle %}
+                            <div>
+                                <h3 class="sz-particles-subtitle">{{ particle.subtitle|raw }}</h3>
+                            </div>
+                        {% endif %}                          
+                        
+                        {#DESCRIPTION#}
+                        {% if particle.description %}
+                            <p class="sz-particles-description">{{ particle.description|raw }}</p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {# it is activated by the class .skills #}
+        <style>
+            @keyframes expanddiv { 
+                0%  { width:0px; } 
+                100%{ width:{{ bar.percentance }}% ;}  
+            }
+        </style>
+
+
+        {# <div class="g-block">
+            <div class="g-content"> #}
+                <div class="sz-skillbars  {{ particle.style }}">
+                    {% for bar in particle.bars %}
+                        <span class="sz-skillsbar-title">{{ bar.skillTitle|raw }}</span>
+                        <span class="sz-skillsbar-percentance"> {{ bar.percentance }}%</span>
+                        <div class="container">
+                            <div class="sz-skill-bar" 
+                                    style="width:{{ bar.percentance }}%;
+                                        background-color:{{ bar.color }};
+                                        transition: width 2s linear 1s;">
+                            
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {# </div>
+        </div>         #}
+        
+    </div>
+
+
+        <script>
+            lazyLoad()
+
+            function lazyLoad() {
+                /* Animate the skill bar */
+                
+                console.log('starting lazy load');
+
+                var lazyItems = [].slice.call(document.querySelectorAll('div.sz-skill-bar'))
+
+                if ('IntersectionObserver' in window) {
+                    console.log('IntersectionObserver activated for lazy items (skillbar)');
+
+                    let lazyObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach((entry) => {
+
+                            if (entry.isIntersecting) {
+                                let lzItem = entry.target;
+
+                                // lzItem.classList.remove('mapHidden');
+                                lzItem.classList.add('skills');
+
+                                lazyObserver.unobserve(lzItem);
+                                console.log('lzItem unobserved');
+                            }
+                        })
+                    })
+                    lazyItems.forEach(item => {
+                        lazyObserver.observe(item)
+                    })
+
+                } else {
+                    // Possibly fall back to a more compatible method here
+                    console.log('lazy load script did not succeed');
+                }
+            } 
+        </script>
+
+
+{% endblock %}

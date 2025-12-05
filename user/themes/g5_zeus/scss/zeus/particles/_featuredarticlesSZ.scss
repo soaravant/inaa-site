@@ -1,0 +1,616 @@
+.g-featuredarticles-sz.sz-wrapper {
+    min-height: 50vh;
+    
+    display: grid;
+    // grid-auto: 1fr; // set equal height for each row
+    
+    // typically min 48rem
+    @include breakpoint(no-mobile) {
+        
+        /* GRID: 12 COLUMNS 
+        * LINES: 1-13 
+        */
+        grid-template-columns: repeat(12, 1fr);
+        
+    }
+
+    .darken-pseudo:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0.45));
+    }
+    
+    &.gutter {
+        grid-gap: 1rem;
+    }
+    
+    //common setting for all layouts:
+    div.g-grid.sz-box {
+
+        
+        .g-block {
+            position: relative;
+            overflow: hidden;
+            
+            img {
+                // auto scale and center
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                
+            }
+            
+            .sz-content {
+                padding: 1.5rem;
+                @include breakpoint(tablet-range) {
+                    padding: 0.5rem;
+                }                    
+                
+                position: absolute;
+                bottom: 0;
+                color: $white;
+                font-size: 0.9rem; // title overides this
+
+ 
+                font-size: 90%;
+                span {
+                    margin-right: 10px;
+                }
+                i {
+                    margin-right: 5px;
+                }
+              
+                
+                // overlay background
+                &.overlay {
+                    width: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                }                // overlay background
+                
+                .g-array-item-category {
+                    a {
+                        color: $white !important;
+                    }
+                }
+
+                .g-item-title {
+                    font-size: 1rem;
+                    margin: 0.2rem 0;
+                    a {
+                        color: white !important;
+                        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+                    }
+                }
+            }
+
+        }
+        
+        @include breakpoint(mobile-only){
+            .g-block {
+                min-height: 25vh;
+            } 
+           
+        }
+
+        
+    }
+    
+    
+    /* LAYOUYTS: put them at the end
+    * so as not the first element
+    * to be overiden
+    */
+    ////////////// HIERARCHICAL HORIZONTAL //////////////////
+    &.horizontal {
+        
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                
+                
+                // 5 ARTICLES  ///////////////////////
+                &:first-of-type.five {
+                    grid-column-start: 1;
+                    grid-column-end: 7;
+                    grid-row-start: 1;
+                    grid-row-end: 3; // 2 rows
+                    
+    
+                    div a img {
+                        min-width: 52rem;
+                    }
+                    
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                    
+                }
+                
+                &:nth-of-type(2).five,
+                &:nth-of-type(4).five {
+                    grid-column-start: 7;
+                    grid-column-end: 10;                    
+                }
+                
+                &:nth-of-type(3).five,
+                &:nth-of-type(5).five {
+                    grid-column-start: 10;
+                    grid-column-end: 13;                    
+                }                
+
+                &:nth-of-type(2).five,
+                &:nth-of-type(3).five,
+                &:nth-of-type(4).five,
+                &:nth-of-type(5).five {
+                    div a img {
+                        min-width: 26rem;
+                    }
+                }
+                
+                // 4 ARTICLES ///////////////////////
+                &:first-of-type.four {
+                    grid-column-start: 1;
+                    grid-column-end: 7;
+                    grid-row-start: 1;
+                    grid-row-end: 3; // 2 rows
+                    
+    
+                    div a img {
+                        min-width: 52rem;
+                    }
+                    
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                    
+                }
+                
+                &:nth-of-type(2).four {
+                    grid-column-start: 7;
+                    grid-column-end: 13;       
+                }
+                
+                &:nth-of-type(3).four {
+                    grid-column-start: 7;
+                    grid-column-end: 10;                         
+                }
+
+                &:nth-of-type(4).four {
+                    grid-column-start: 10;
+                    grid-column-end: 13;                    
+                }                   
+    
+                
+                &:nth-of-type(2).four,
+                &:nth-of-type(3).four,
+                &:nth-of-type(4).four {
+                    div a img {
+                        min-width: 26rem;
+                    }
+                }
+                
+                // 3 ARTICLES ///////////////////////
+                &:first-of-type.three {
+                    grid-column-start: 1;
+                    grid-column-end: 7;
+                    grid-row-start: 1;
+                    grid-row-end: 3; // 2 rows
+                    
+    
+                    div a img {
+                        min-width: 52rem;
+                    }
+                    
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                    
+                }
+    
+                &:nth-of-type(2).three,
+                &:nth-of-type(3).three{
+                    grid-column-start: 7;
+                    grid-column-end: 13;
+
+                    div a img {
+                        min-width: 26rem;
+                    }
+                }
+                
+                &:nth-of-type(3).three {
+                    grid-row-start: 2;
+                    
+                    
+                }
+                
+                
+                
+                
+            } // END BREAKPOIND MOBILE
+            
+        }
+    }
+    
+    ////////////// HIERARCHICAL VERTICAL //////////////////
+    &.vertical {
+        
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                grid-row: 1;
+                
+                div a img {
+                    min-width: 75vh;
+                }
+                
+                // 5 ARTICLES  ///////////////////////
+                &:nth-of-type(1).five {
+                    grid-column-start: 5;
+                    grid-column-end: 9;
+
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                    
+                }
+                
+                &:nth-of-type(2).five {
+                    grid-column-start: 1;
+                    grid-column-end: 3;                    
+                }
+                
+                &:nth-of-type(3).five {
+                    grid-column-start: 3;
+                    grid-column-end: 5;                    
+                }
+                
+                &:nth-of-type(4).five {
+                    grid-column-start: 9;
+                    grid-column-end: 11;                    
+                }
+                
+                &:nth-of-type(5).five {
+                    grid-column-start: 11;
+                    grid-column-end: 13;                    
+                }                
+
+
+                // 4 ARTICLES  ///////////////////////
+                &:nth-of-type(1).four {
+                    grid-column-start: 1;
+                    grid-column-end: 6;
+
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                }
+                
+                &:nth-of-type(2).four {
+                    grid-column-start: 6;
+                    grid-column-end: 9;                    
+                }
+                
+                &:nth-of-type(3).four {
+                    grid-column-start: 9;
+                    grid-column-end: 11;                    
+                }
+                
+                &:nth-of-type(4).four {
+                    grid-column-start: 11;
+                    grid-column-end: 13;                    
+                }
+                
+                // 3 ARTICLES  ///////////////////////
+                &:nth-of-type(1).three {
+                    grid-column-start: 4;
+                    grid-column-end: 10;
+
+                    .g-item-title {
+                        font-size: 1.6rem;
+                    }
+                }
+                
+                &:nth-of-type(2).three {
+                    grid-column-start: 1;
+                    grid-column-end: 4;                    
+                }
+                
+                &:nth-of-type(3).three {
+                    grid-column-start: 10;
+                    grid-column-end: 13;                    
+                }
+            }
+        }
+    }
+    
+////////////// SYMMETRICAL ////////////////////////////
+    
+    &.symmetry {
+        
+        // @include breakpoint(no-mobile) {
+        //     grid-template-columns: repeat(5, 1fr);
+        // }
+        
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                grid-row: 1;
+                
+                div a img {
+                    min-width: 75vh;
+                }
+                
+                // 5 ARTICLES  ///////////////////////
+                // 12 column grid cannot be divided to 5 
+                // first and last columns are bigger.
+                
+                &:nth-of-type(1).five {
+                    grid-column-start: 1;
+                    grid-column-end: 4; 
+                }
+                
+                &:nth-of-type(2).five {
+                    grid-column-start: 4;
+                    grid-column-end: 6; 
+                }
+                
+                &:nth-of-type(3).five {
+                    grid-column-start: 6;
+                    grid-column-end: 8; 
+                }
+                
+                &:nth-of-type(4).five {
+                    grid-column-start: 8;
+                    grid-column-end: 10; 
+                }
+                
+                &:nth-of-type(5).five {
+                    grid-column-start: 10;
+                    grid-column-end: 13; 
+                }                
+            }
+        }
+        
+        // // 4 ARTICLES  ///////////////////////
+        // @include breakpoint(no-mobile) {
+        //     grid-template-columns: repeat(4, 1fr);
+        // }
+        
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                grid-row: 1;        
+
+                &:nth-of-type(1).four {
+                    grid-column-start: 1;
+                    grid-column-end: 4; 
+                }
+                
+                &:nth-of-type(2).four {
+                    grid-column-start: 4;
+                    grid-column-end: 7; 
+                }
+                
+                &:nth-of-type(3).four {
+                    grid-column-start: 7;
+                    grid-column-end: 10; 
+                }
+                
+                &:nth-of-type(4).four {
+                    grid-column-start: 10;
+                    grid-column-end: 13; 
+                }
+            }
+        }
+        
+        
+                
+                
+        // // 3 ARTICLES  ///////////////////////
+        // @include breakpoint(no-mobile) {
+        //     grid-template-columns: repeat(3, 1fr);
+        // }
+        
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                grid-row: 1;        
+
+                &:nth-of-type(1).three {
+                    grid-column-start: 1;
+                    grid-column-end: 5; 
+                }
+                
+                &:nth-of-type(2).three {
+                    grid-column-start: 5;
+                    grid-column-end: 9; 
+                }
+                
+                &:nth-of-type(3).three {
+                    grid-column-start: 9;
+                    grid-column-end: 13; 
+                }
+
+            }
+        }
+        
+    }
+
+    ////////////// LIST ////////////////////////////
+    &.list {
+  
+        // ARTICLES  ///////////////////////
+        // one column only, 
+        // the first article is displayed bigger than the others
+        div.g-grid.sz-box {
+            border-bottom: 1px solid #DDD;
+            margin-bottom: 1rem;
+            
+            //override previous common settings
+            .g-block {
+                
+                img {
+                    // auto scale and center
+                    position:unset;
+                    top:unset;
+                    left:unset;
+                    transform:unset;
+                    
+                }
+                            
+                .darken-pseudo:after {
+                    position: unset;
+                    display: unset;
+                    background-image: unset;
+                }
+
+                .sz-content {
+                    padding: 1rem 0;
+                    position: unset;
+                    // bottom: 0;
+                    color: black !important;
+                    font-size: 0.9rem; // title overides this
+                    
+                    @include breakpoint(no-mobile) {
+                        padding: 0 1rem;
+                    }
+                    
+                    // overlay background
+                    &.overlay {
+                        background-color:unset;
+                    }                // overlay background
+                    
+                    .g-array-item-category {
+                        margin: 0;
+                        .label {
+                            background: none;
+                            a {
+                                color: $accent-color-3 !important;
+
+                            }
+                        }
+                    }
+
+                    .g-item-title {
+                        margin: 0.2rem 0;
+                        a {
+                            color: black !important;
+                            text-shadow: none;
+                        }
+                    }
+                }
+            }               
+        } 
+    }
+
+    // in conjuction with .list
+    //  GRID
+    // ---------|
+    //   MAIN   | 
+    //   POST   | 
+    //          | 
+    // ---------|
+    // POST 2 --|
+    // POST 3 --|
+    // etc -----|    
+    &.one-column {
+        div.g-grid.sz-box {
+            grid-column-start: 1;
+            grid-column-end: 13; 
+            @include breakpoint(no-mobile) {
+                
+                padding: 0.5rem 0;
+                
+                .container {
+                    display: flex;
+                    // distribute items in one row
+                    flex-flow: row nowrap;
+                    
+                    // left item
+                    .sz-article-image {
+                        flex: 0 0 30%;
+                    }
+                    // right item
+                    .sz-content {
+                        flex: 1;
+                    }
+                    
+                }
+                
+                // first article
+                &:nth-of-type(1) {
+                    .container {
+                        flex-direction: column;
+                    }
+                    .sz-content {
+                        padding: 1rem 0;
+                        .g-item-title {
+                            font-size: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ////////////// 2 COLUMN LIST ////////////////////////////
+    //        GRID
+    // ---------|------------
+    //   MAIN   | POST 2 -----
+    //   POST   | POST 3 -----
+    //          | etc --------
+    // ---------|------------    
+    // in conjuction with .list
+    &.two-column {
+        
+        grid-column-gap: 2rem;
+        div.g-grid.sz-box {
+            @include breakpoint(no-mobile) {
+                grid-column-start: 7;
+                grid-column-end: 13; 
+                grid-auto-rows: auto;
+                
+                padding: 0.5rem 0;
+                
+                .container {
+                    display: flex;
+                    // distribute items in one row
+                    flex-flow: row nowrap;
+                    
+                    // left item
+                    .sz-article-image {
+                        flex: 0 0 30%;
+                    }
+                    // right item
+                    .sz-content {
+                        flex: 1;
+                    }
+                    
+                }
+                
+                // first article
+                &:nth-of-type(1) {
+                    grid-column-start: 1;
+                    grid-column-end: 7;
+                    grid-row-start: 1;
+                    // should be the last line. 
+                    // The Number is +1 the max articles
+                    // should be auto number
+                    grid-row-end: 6;
+                    
+                    .container {
+                        flex-direction: column;
+                    }
+                    .sz-content {
+                        padding: 1rem 0;
+                        .g-item-title {
+                            font-size: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

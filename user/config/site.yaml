@@ -1,0 +1,19 @@
+title: 'Κατηχητικά Σχολεία Ι.Ν. Αγ. Αλεξάνδρου Π. Φαλήρου'
+default_lang: gr
+author:
+  name: Admin
+  email: efthimisgeo@protonmail.com
+taxonomies:
+  - category
+  - tag
+metadata:
+  description: 'Κατηχητικά Σχολεία Ι.Ν. Αλεξάνδρου Π. Φαλήρου'
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+redirects: null
+routes: null
+blog:
+  route: /blog
