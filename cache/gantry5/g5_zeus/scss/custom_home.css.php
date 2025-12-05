@@ -1,7 +1,7 @@
 <?php
 return [
     'file' => 'gantry-theme://css-compiled/custom_home.css',
-    'timestamp' => 1764939378,
+    'timestamp' => 1764942798,
     'md5' => '0b17fa7408efd4e0f66f0a2082f13078',
     'variables' => [
         'above-section-preset' => '\'disabled\'',
@@ -89,6 +89,6 @@ return [
         'preset' => '\'preset1\''
     ],
     'imports' => [
-        'custom.scss' => 1764939253
+        'custom.scss' => 1764939828
     ]
 ];

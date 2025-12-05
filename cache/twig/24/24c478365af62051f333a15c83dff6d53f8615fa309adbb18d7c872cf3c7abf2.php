@@ -134,27 +134,39 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
             if (items.length === 0) return;
 
             // Configuration
-            var visibleItems = 4;
+            // We always use 4 clones to support the desktop view.
+            var CLONE_COUNT = 4;
             var totalItems = items.length;
-            var itemWidthPercent = 100 / visibleItems; // 25%
-
-            // We need clones at start and end for infinite loop.
-            // Clones at start: last 'visibleItems' items.
-            // Clones at end: first 'visibleItems' items.
-            // Actually, to be safe and smooth, let's clone 'visibleItems' amount.
             
-            var clonesBefore = items.slice(-visibleItems);
-            var clonesAfter = items.slice(0, visibleItems);
-            
+            // Generate Clones
+            var clonesBefore = items.slice(-CLONE_COUNT);
+            var clonesAfter = items.slice(0, CLONE_COUNT);
             var allItems = clonesBefore.concat(items).concat(clonesAfter);
             
-            // Render all items
+            // State
+            // Index 0 corresponds to the first REAL item.
+            // The track has 'CLONE_COUNT' clones at the start.
+            // So the initial offset index is 'CLONE_COUNT'.
+            var offsetIndex = CLONE_COUNT; 
+            var isAnimating = false;
+            
+            // Dynamic State
+            var currentVisibleItems = 4;
+            var itemWidthPercent = 25; // 100 / 4
+
+            // Helper to determine visible items based on width
+            function getVisibleItems() {
+                return window.innerWidth <= 768 ? 1 : 4;
+            }
+
+            // Render all items initially
             allItems.forEach(function(data) {
                 var node = createItemNode(data);
-                node.style.flex = '0 0 ' + itemWidthPercent + '%';
-                node.style.width = itemWidthPercent + '%'; // Fallback
                 track.appendChild(node);
             });
+            
+            // Initial Layout
+            updateLayout();
 
             function createItemNode(data) {
                 var itemDiv = document.createElement('div');
@@ -179,13 +191,20 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 return itemDiv;
             }
 
-            // State
-            // Index 0 corresponds to the first REAL item.
-            // The track has 'visibleItems' clones at the start.
-            // So the initial offset index is 'visibleItems'.
-            var currentIndex = 0; 
-            var offsetIndex = visibleItems; 
-            var isAnimating = false;
+            function updateLayout() {
+                currentVisibleItems = getVisibleItems();
+                itemWidthPercent = 100 / currentVisibleItems;
+                
+                // Update width of all items
+                var children = track.children;
+                for (var i = 0; i < children.length; i++) {
+                    children[i].style.flex = '0 0 ' + itemWidthPercent + '%';
+                    children[i].style.width = itemWidthPercent + '%';
+                }
+                
+                // Update position without transition
+                updateTransform(false);
+            }
 
             function updateTransform(enableTransition) {
                 if (enableTransition) {
@@ -198,9 +217,6 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 track.style.transform = 'translateX(' + percentTranslate + '%)';
             }
 
-            // Initial Position
-            updateTransform(false);
-
             function moveNext() {
                 if (isAnimating) return;
                 isAnimating = true;
@@ -210,11 +226,9 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 
                 setTimeout(function() {
                     // Check if we reached the end clones
-                    // The real items end at index: visibleItems + totalItems - 1
-                    // The first clone after real items is at: visibleItems + totalItems
-                    if (offsetIndex >= visibleItems + totalItems) {
+                    if (offsetIndex >= CLONE_COUNT + totalItems) {
                         // Jump back to start of real items
-                        offsetIndex = visibleItems;
+                        offsetIndex = CLONE_COUNT;
                         updateTransform(false);
                     }
                     isAnimating = false;
@@ -230,30 +244,16 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 
                 setTimeout(function() {
                     // Check if we reached the start clones
-                    // The real items start at index: visibleItems
-                    // The last clone before real items is at: visibleItems - 1
-                    if (offsetIndex < visibleItems) {
+                    if (offsetIndex < CLONE_COUNT) {
                         // Jump to end of real items
-                        // The last real item is at: visibleItems + totalItems - 1
-                        // We want to show the set ending at the last real item.
-                        // Actually, if we are at index 'visibleItems - 1' (which is the last item of the 'before' clones),
-                        // it corresponds to the last item of the real list.
-                        // So we should jump to: visibleItems + totalItems - 1
+                        // We are at index CLONE_COUNT - 1 (last item of before-clones)
+                        // This corresponds to last real item: (CLONE_COUNT + totalItems - 1)
+                        // But wait, if we are at offset CLONE_COUNT - 1, we are technically safely valid?
+                        // Yes, but we want to reset to the main list for infinite scroll.
                         
-                        // Wait, if offsetIndex is the START of the view.
-                        // If offsetIndex becomes visibleItems - 1.
-                        // That means we are viewing [CloneLast, Item1, Item2, Item3].
-                        // We want to jump to [ItemLast, Item1, Item2, Item3] ?? No.
-                        // We want to jump to the position where ItemLast is the first visible item?
-                        // No, 'clonesBefore' are the LAST items.
-                        // So clonesBefore[0] is items[totalItems - visibleItems].
-                        // clonesBefore[last] is items[totalItems - 1].
-                        
-                        // If offsetIndex drops below visibleItems (e.g. visibleItems - 1),
-                        // We are looking at the last clone.
-                        // We should jump to the corresponding real item position.
-                        // The real item corresponding to (visibleItems - 1) is (visibleItems + totalItems - 1).
-                        
+                        // If offsetIndex drops below CLONE_COUNT
+                        // It means we are in the left buffer.
+                        // We must jump to: offsetIndex + totalItems
                         offsetIndex = offsetIndex + totalItems;
                         updateTransform(false);
                     }
@@ -263,6 +263,15 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
 
             nextBtn.addEventListener('click', moveNext);
             prevBtn.addEventListener('click', movePrev);
+            
+            // Resize listener
+            var resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    updateLayout();
+                }, 100);
+            });
 
         })();
     </script>
@@ -341,27 +350,39 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
             if (items.length === 0) return;
 
             // Configuration
-            var visibleItems = 4;
+            // We always use 4 clones to support the desktop view.
+            var CLONE_COUNT = 4;
             var totalItems = items.length;
-            var itemWidthPercent = 100 / visibleItems; // 25%
-
-            // We need clones at start and end for infinite loop.
-            // Clones at start: last 'visibleItems' items.
-            // Clones at end: first 'visibleItems' items.
-            // Actually, to be safe and smooth, let's clone 'visibleItems' amount.
             
-            var clonesBefore = items.slice(-visibleItems);
-            var clonesAfter = items.slice(0, visibleItems);
-            
+            // Generate Clones
+            var clonesBefore = items.slice(-CLONE_COUNT);
+            var clonesAfter = items.slice(0, CLONE_COUNT);
             var allItems = clonesBefore.concat(items).concat(clonesAfter);
             
-            // Render all items
+            // State
+            // Index 0 corresponds to the first REAL item.
+            // The track has 'CLONE_COUNT' clones at the start.
+            // So the initial offset index is 'CLONE_COUNT'.
+            var offsetIndex = CLONE_COUNT; 
+            var isAnimating = false;
+            
+            // Dynamic State
+            var currentVisibleItems = 4;
+            var itemWidthPercent = 25; // 100 / 4
+
+            // Helper to determine visible items based on width
+            function getVisibleItems() {
+                return window.innerWidth <= 768 ? 1 : 4;
+            }
+
+            // Render all items initially
             allItems.forEach(function(data) {
                 var node = createItemNode(data);
-                node.style.flex = '0 0 ' + itemWidthPercent + '%';
-                node.style.width = itemWidthPercent + '%'; // Fallback
                 track.appendChild(node);
             });
+            
+            // Initial Layout
+            updateLayout();
 
             function createItemNode(data) {
                 var itemDiv = document.createElement('div');
@@ -386,13 +407,20 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 return itemDiv;
             }
 
-            // State
-            // Index 0 corresponds to the first REAL item.
-            // The track has 'visibleItems' clones at the start.
-            // So the initial offset index is 'visibleItems'.
-            var currentIndex = 0; 
-            var offsetIndex = visibleItems; 
-            var isAnimating = false;
+            function updateLayout() {
+                currentVisibleItems = getVisibleItems();
+                itemWidthPercent = 100 / currentVisibleItems;
+                
+                // Update width of all items
+                var children = track.children;
+                for (var i = 0; i < children.length; i++) {
+                    children[i].style.flex = '0 0 ' + itemWidthPercent + '%';
+                    children[i].style.width = itemWidthPercent + '%';
+                }
+                
+                // Update position without transition
+                updateTransform(false);
+            }
 
             function updateTransform(enableTransition) {
                 if (enableTransition) {
@@ -405,9 +433,6 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 track.style.transform = 'translateX(' + percentTranslate + '%)';
             }
 
-            // Initial Position
-            updateTransform(false);
-
             function moveNext() {
                 if (isAnimating) return;
                 isAnimating = true;
@@ -417,11 +442,9 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 
                 setTimeout(function() {
                     // Check if we reached the end clones
-                    // The real items end at index: visibleItems + totalItems - 1
-                    // The first clone after real items is at: visibleItems + totalItems
-                    if (offsetIndex >= visibleItems + totalItems) {
+                    if (offsetIndex >= CLONE_COUNT + totalItems) {
                         // Jump back to start of real items
-                        offsetIndex = visibleItems;
+                        offsetIndex = CLONE_COUNT;
                         updateTransform(false);
                     }
                     isAnimating = false;
@@ -437,30 +460,16 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
                 
                 setTimeout(function() {
                     // Check if we reached the start clones
-                    // The real items start at index: visibleItems
-                    // The last clone before real items is at: visibleItems - 1
-                    if (offsetIndex < visibleItems) {
+                    if (offsetIndex < CLONE_COUNT) {
                         // Jump to end of real items
-                        // The last real item is at: visibleItems + totalItems - 1
-                        // We want to show the set ending at the last real item.
-                        // Actually, if we are at index 'visibleItems - 1' (which is the last item of the 'before' clones),
-                        // it corresponds to the last item of the real list.
-                        // So we should jump to: visibleItems + totalItems - 1
+                        // We are at index CLONE_COUNT - 1 (last item of before-clones)
+                        // This corresponds to last real item: (CLONE_COUNT + totalItems - 1)
+                        // But wait, if we are at offset CLONE_COUNT - 1, we are technically safely valid?
+                        // Yes, but we want to reset to the main list for infinite scroll.
                         
-                        // Wait, if offsetIndex is the START of the view.
-                        // If offsetIndex becomes visibleItems - 1.
-                        // That means we are viewing [CloneLast, Item1, Item2, Item3].
-                        // We want to jump to [ItemLast, Item1, Item2, Item3] ?? No.
-                        // We want to jump to the position where ItemLast is the first visible item?
-                        // No, 'clonesBefore' are the LAST items.
-                        // So clonesBefore[0] is items[totalItems - visibleItems].
-                        // clonesBefore[last] is items[totalItems - 1].
-                        
-                        // If offsetIndex drops below visibleItems (e.g. visibleItems - 1),
-                        // We are looking at the last clone.
-                        // We should jump to the corresponding real item position.
-                        // The real item corresponding to (visibleItems - 1) is (visibleItems + totalItems - 1).
-                        
+                        // If offsetIndex drops below CLONE_COUNT
+                        // It means we are in the left buffer.
+                        // We must jump to: offsetIndex + totalItems
                         offsetIndex = offsetIndex + totalItems;
                         updateTransform(false);
                     }
@@ -470,6 +479,15 @@ class __TwigTemplate_2b44d2418e0c1f097aa46ead1606d3641c889115263dde6de5305c02026
 
             nextBtn.addEventListener('click', moveNext);
             prevBtn.addEventListener('click', movePrev);
+            
+            // Resize listener
+            var resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    updateLayout();
+                }, 100);
+            });
 
         })();
     </script>

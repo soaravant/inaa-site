@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/plugins/markdown-notices/markdown-notices.yaml',
-    'modified' => 1764939253,
+    'modified' => 1764939828,
     'size' => 99,
     'data' => [
         'enabled' => true,

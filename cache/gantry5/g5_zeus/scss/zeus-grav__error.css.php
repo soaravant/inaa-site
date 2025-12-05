@@ -1,7 +1,7 @@
 <?php
 return [
     'file' => 'gantry-theme://css-compiled/zeus-grav__error.css',
-    'timestamp' => 1764935681,
+    'timestamp' => 1764942822,
     'md5' => 'a0342d72f8577c8425a147579d3361b7',
     'variables' => [
         'above-section-preset' => '\'disabled\'',

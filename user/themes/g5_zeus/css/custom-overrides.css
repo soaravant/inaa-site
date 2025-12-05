@@ -363,23 +363,39 @@ html {
     transform: none;
     margin: 0;
     border: none;
-    /* On mobile, maybe show 1 item? */
+    /* On mobile, show 1 item (100% width) */
     flex-basis: 100% !important;
   }
 
   .custom-carousel-img {
     width: 100%;
     transform: none;
+    /* Ensure image covers the area nicely */
+    background-size: cover;
   }
 
   .custom-carousel-content {
     transform: none;
     opacity: 1;
+    /* Always show content on mobile if desired, or keep as hover? Let's keep it visible or 1 on hover. 
+                   Actually, hover doesn't exist on touch. Let's make it always visible? 
+                   User said "simple slide". Let's keep it simple. */
   }
 
-  /* We need to update JS visibleItems for mobile to make this work perfectly,
-       but for now this CSS ensures it doesn't look broken.
-    */
+  /* Adjust navigation buttons for mobile */
+  .custom-carousel-nav {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .custom-carousel-nav.prev {
+    left: 10px;
+  }
+
+  .custom-carousel-nav.next {
+    right: 10px;
+  }
 }
 
 /* --- Final Carousel Fixes --- */

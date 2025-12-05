@@ -2,11 +2,11 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledJsonFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/data/flex/indexes/pages.json',
-    'modified' => 1764939826,
+    'modified' => 1764942797,
     'size' => 6929,
     'data' => [
         'version' => '1.5',
-        'timestamp' => 1764939377,
+        'timestamp' => 1764942797,
         'count' => 27,
         'index' => [
             '' => [
@@ -31,298 +31,298 @@ return [
                 'key' => 'home',
                 'storage_key' => '01.home',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '1441ebb8eaf841e864996ff32f880326'
+                'checksum' => '185b784b0353e83e4a4fd698c428c5d2'
             ],
             '02.fotografies' => [
                 'key' => 'fotografies',
                 'storage_key' => '02.fotografies',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => 'b32afc11e8af5659e55fe8534ec52a28'
+                'checksum' => 'e2107b37a9275cd249baa58971f0a4d3'
             ],
             '02.pages' => [
                 'key' => 'pages',
                 'storage_key' => '02.pages',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
                 'children' => [
-                    '01.modular' => 1764939253,
-                    '02.blog' => 1764939253,
-                    '03.error' => 1764939253,
-                    '04.offline-page' => 1764939253
+                    '01.modular' => 1764939829,
+                    '02.blog' => 1764939829,
+                    '03.error' => 1764939829,
+                    '04.offline-page' => 1764939829
                 ],
-                'checksum' => '3c2931be19208b0f5d19f0096ff3d64a'
+                'checksum' => '86573a6b05c90fe97d333a3dbd628a99'
             ],
             '02.pages/01.modular' => [
                 'key' => 'pages/modular',
                 'storage_key' => '02.pages/01.modular',
                 'template' => 'modular',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'modular' => 1764939253
+                        'modular' => 1764939829
                     ]
                 ],
                 'children' => [
-                    '_callout' => 1764939253,
-                    '_features' => 1764939253,
-                    '_highlights' => 1764939253,
-                    '_showcase' => 1764939253
+                    '_callout' => 1764939829,
+                    '_features' => 1764939829,
+                    '_highlights' => 1764939829,
+                    '_showcase' => 1764939829
                 ],
-                'checksum' => '4ee1c404e1f70ab0f656734f31eebd36'
+                'checksum' => 'f334154c1f128f3d59ce7c7b9453ec2b'
             ],
             '02.pages/01.modular/_callout' => [
                 'key' => 'pages/modular/_callout',
                 'storage_key' => '02.pages/01.modular/_callout',
                 'template' => 'text',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'text' => 1764939253
+                        'text' => 1764939829
                     ]
                 ],
-                'checksum' => 'e19edc2c908739b3e99787ba3983b8ff'
+                'checksum' => '350ca9ebcfb7fa27ca13c8f03e8d9c5b'
             ],
             '02.pages/01.modular/_features' => [
                 'key' => 'pages/modular/_features',
                 'storage_key' => '02.pages/01.modular/_features',
                 'template' => 'features',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'features' => 1764939253
+                        'features' => 1764939829
                     ]
                 ],
-                'checksum' => '768445b5f8dbf3da57487f3da2443fba'
+                'checksum' => 'd9ddcb6429130294827811eb2cc8c244'
             ],
             '02.pages/01.modular/_highlights' => [
                 'key' => 'pages/modular/_highlights',
                 'storage_key' => '02.pages/01.modular/_highlights',
                 'template' => 'features',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'features' => 1764939253
+                        'features' => 1764939829
                     ]
                 ],
-                'checksum' => '6e9bd03e18addfd0a003a035348fb029'
+                'checksum' => 'fae58cc4083d76355e4e9e3def664055'
             ],
             '02.pages/01.modular/_showcase' => [
                 'key' => 'pages/modular/_showcase',
                 'storage_key' => '02.pages/01.modular/_showcase',
                 'template' => 'showcase',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'showcase' => 1764939253
+                        'showcase' => 1764939829
                     ]
                 ],
-                'checksum' => '1d0dc7573a0e278bbb47738a253511b2'
+                'checksum' => '3f29a39444d670ad2db67ed98f77ddf1'
             ],
             '02.pages/02.blog' => [
                 'key' => 'pages/blog',
                 'storage_key' => '02.pages/02.blog',
                 'template' => 'blog_list',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_list' => 1764939253
+                        'blog_list' => 1764939829
                     ]
                 ],
                 'children' => [
-                    'classic-modern-architecture' => 1764939253,
-                    'focus-and-blur' => 1764939253,
-                    'just-some-text-today' => 1764939253,
-                    'monaco-night' => 1764939253,
-                    'random-thoughts' => 1764939253,
-                    'sunshine-in-the-hills' => 1764939253,
-                    'the-urban-jungle' => 1764939253
+                    'classic-modern-architecture' => 1764939829,
+                    'focus-and-blur' => 1764939829,
+                    'just-some-text-today' => 1764939829,
+                    'monaco-night' => 1764939829,
+                    'random-thoughts' => 1764939829,
+                    'sunshine-in-the-hills' => 1764939829,
+                    'the-urban-jungle' => 1764939829
                 ],
-                'checksum' => '0a05f4809cf741b7522dac6ac28d2850'
+                'checksum' => '8fd75dae19968fed856293b8a0c12668'
             ],
             '02.pages/02.blog/classic-modern-architecture' => [
                 'key' => 'pages/blog/classic-modern-architecture',
                 'storage_key' => '02.pages/02.blog/classic-modern-architecture',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => 'c1ffdfcea5597be5a2c1b2c50b0d2b75'
+                'checksum' => 'b294734b71d85cfa02aea5ff94eef5df'
             ],
             '02.pages/02.blog/focus-and-blur' => [
                 'key' => 'pages/blog/focus-and-blur',
                 'storage_key' => '02.pages/02.blog/focus-and-blur',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => '3066d24b1a2abf87ad1b77eeed76ae15'
+                'checksum' => '897ba4f06bd775e137432c40789e7583'
             ],
             '02.pages/02.blog/just-some-text-today' => [
                 'key' => 'pages/blog/just-some-text-today',
                 'storage_key' => '02.pages/02.blog/just-some-text-today',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => 'a6a83772e4adc244637a683783416175'
+                'checksum' => 'e7e69934886fee7a6d99f0af17da4d74'
             ],
             '02.pages/02.blog/monaco-night' => [
                 'key' => 'pages/blog/monaco-night',
                 'storage_key' => '02.pages/02.blog/monaco-night',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => 'ad39b3463c187d3ad5f7b802779b5411'
+                'checksum' => '73969e3a989af87a8cf08ef943e881cf'
             ],
             '02.pages/02.blog/random-thoughts' => [
                 'key' => 'pages/blog/random-thoughts',
                 'storage_key' => '02.pages/02.blog/random-thoughts',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => '63cdf3ea402e12b2ccc8f67b93ebed26'
+                'checksum' => 'f2be2a80f0f51d7875c6477b13de1dca'
             ],
             '02.pages/02.blog/sunshine-in-the-hills' => [
                 'key' => 'pages/blog/sunshine-in-the-hills',
                 'storage_key' => '02.pages/02.blog/sunshine-in-the-hills',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => 'd9fc53ccf58c89b893eaf4ea476edad4'
+                'checksum' => 'ad93bbfbbcea60a79aaed2844675ab2a'
             ],
             '02.pages/02.blog/the-urban-jungle' => [
                 'key' => 'pages/blog/the-urban-jungle',
                 'storage_key' => '02.pages/02.blog/the-urban-jungle',
                 'template' => 'blog_item',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'blog_item' => 1764939253
+                        'blog_item' => 1764939829
                     ]
                 ],
-                'checksum' => '748a928db05a2b934102302fa43fca40'
+                'checksum' => 'ab6139d3db1e39364e627a52b83c1655'
             ],
             '02.pages/03.error' => [
                 'key' => 'pages/error',
                 'storage_key' => '02.pages/03.error',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '1a9c60906ed24cdf7a4cd2739cc3670d'
+                'checksum' => '61820386d92e418c68d3ec2e299173f1'
             ],
             '02.pages/04.offline-page' => [
                 'key' => 'pages/offline-page',
                 'storage_key' => '02.pages/04.offline-page',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => 'ca1d7ccb16882f29bbd119f6ac594551'
+                'checksum' => '004cbd5697053b7900d64e4746445e2f'
             ],
             '03.drastiriotites' => [
                 'key' => 'drastiriotites',
                 'storage_key' => '03.drastiriotites',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '85c7b93348616991ba75a1ba18912ed1'
+                'checksum' => '71bec0ae54b61d49ddca126ba28f9a44'
             ],
             '04.programma' => [
                 'key' => 'programma',
                 'storage_key' => '04.programma',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => 'b878e804a806b2efcaf075a7409c0b5a'
+                'checksum' => 'fceb34ee2eea5a655a6a352ebae261c7'
             ],
             '05.dieythynsi' => [
                 'key' => 'dieythynsi',
                 'storage_key' => '05.dieythynsi',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => 'ab2527379b1573e57011f721ad566f59'
+                'checksum' => '9262d78a0b38a7fe9e6c3b85bf687121'
             ],
             '06.online' => [
                 'key' => 'online',
                 'storage_key' => '06.online',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '603eeed7e33e4cc30b2f772d24c8fbf2'
+                'checksum' => 'a4e3c6ec4d463ce4f72002238ae81af7'
             ],
             '07.epikoinonia' => [
                 'key' => 'epikoinonia',
                 'storage_key' => '07.epikoinonia',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '1da66825f608e39130162bcb7d76bd4b'
+                'checksum' => 'd877313418c9a283089a3b7f60109998'
             ],
             'form' => [
                 'key' => 'form',
@@ -339,25 +339,25 @@ return [
                 'key' => 'form/contact',
                 'storage_key' => 'form/contact',
                 'template' => 'form',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'form' => 1764939253
+                        'form' => 1764939829
                     ]
                 ],
-                'checksum' => '186a4ef7d74c4253f31fa5896688ed37'
+                'checksum' => '46104baa807f83b66ff9aced6317513d'
             ],
             'form/thankyou' => [
                 'key' => 'form/thankyou',
                 'storage_key' => 'form/thankyou',
                 'template' => 'default',
-                'storage_timestamp' => 1764939253,
+                'storage_timestamp' => 1764939829,
                 'markdown' => [
                     '' => [
-                        'default' => 1764939253
+                        'default' => 1764939829
                     ]
                 ],
-                'checksum' => '6c5c49503c4d8156d4cfc6956f3dbd80'
+                'checksum' => '1e4a77195253f3611c5a69c5fd76e35b'
             ]
         ]
     ]

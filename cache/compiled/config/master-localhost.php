@@ -1,61 +1,61 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1764939826,
-    'checksum' => '4f350e8bdeaefe7de3640c5b0fb5ada3',
+    'timestamp' => 1764942797,
+    'checksum' => 'e170ea1f278eca36071e0fcfdb3aa003',
     'files' => [
         'user/config' => [
             'backups' => [
                 'file' => 'user/config/backups.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'media' => [
                 'file' => 'user/config/media.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/email' => [
                 'file' => 'user/config/plugins/email.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/gantry5' => [
                 'file' => 'user/config/plugins/gantry5.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/google-maps' => [
                 'file' => 'user/config/plugins/google-maps.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/problems' => [
                 'file' => 'user/config/plugins/problems.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'scheduler' => [
                 'file' => 'user/config/scheduler.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'security' => [
                 'file' => 'user/config/security.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'site' => [
                 'file' => 'user/config/site.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'streams' => [
                 'file' => 'user/config/streams.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'system' => [
                 'file' => 'user/config/system.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'themes/g5_helium' => [
                 'file' => 'user/config/themes/g5_helium.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'versions' => [
                 'file' => 'user/config/versions.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ]
         ],
         'system/config' => [
@@ -91,69 +91,69 @@ return [
         'user/plugins' => [
             'plugins/markdown-notices' => [
                 'file' => 'user/plugins/markdown-notices/markdown-notices.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/pagination' => [
                 'file' => 'user/plugins/pagination/pagination.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/form' => [
                 'file' => 'user/plugins/form/form.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/flex-objects' => [
                 'file' => 'user/plugins/flex-objects/flex-objects.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/gantry5' => [
                 'file' => 'user/plugins/gantry5/gantry5.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/simplesearch' => [
                 'file' => 'user/plugins/simplesearch/simplesearch.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939828
             ],
             'plugins/admin' => [
                 'file' => 'user/plugins/admin/admin.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/google-maps' => [
                 'file' => 'user/plugins/google-maps/google-maps.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/problems' => [
                 'file' => 'user/plugins/problems/problems.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/shortcode-core' => [
                 'file' => 'user/plugins/shortcode-core/shortcode-core.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/quick-tray-links' => [
                 'file' => 'user/plugins/quick-tray-links/quick-tray-links.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/error' => [
                 'file' => 'user/plugins/error/error.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/login' => [
                 'file' => 'user/plugins/login/login.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'plugins/email' => [
                 'file' => 'user/plugins/email/email.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ]
         ],
         'user/themes' => [
             'themes/g5_helium' => [
                 'file' => 'user/themes/g5_helium/g5_helium.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ],
             'themes/g5_zeus' => [
                 'file' => 'user/themes/g5_zeus/g5_zeus.yaml',
-                'modified' => 1764939253
+                'modified' => 1764939829
             ]
         ]
     ],

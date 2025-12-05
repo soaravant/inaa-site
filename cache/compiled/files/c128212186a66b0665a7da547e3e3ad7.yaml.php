@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/plugins/error/languages.yaml',
-    'modified' => 1632129552,
+    'modified' => 1764939829,
     'size' => 1549,
     'data' => [
         'en' => [
