@@ -1,9 +1,0 @@
-settings:
-  title: Mainmenu
-ordering:
-  home: ''
-items:
-  home:
-    rel: ''
-    enabled: true
-    anchor_class: ''

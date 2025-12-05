@@ -1,5 +1,0 @@
----
-title: Πρoγραμμα
-redirect: '#programma'
----
-
