@@ -22,6 +22,15 @@ $html = str_replace('src="/user/', 'src="./user/', $html);
 $html = str_replace('href="/assets/', 'href="./assets/', $html);
 $html = str_replace('src="/assets/', 'src="./assets/', $html);
 
+// Handle inline background images (single quotes or no quotes)
+// url('/user/...') -> url('./user/...')
+$html = str_replace("url('/user/", "url('./user/", $html);
+$html = str_replace('url("/user/', 'url("./user/', $html);
+$html = str_replace('url(/user/', 'url(./user/', $html);
+
+// Handle escaped versions just in case
+$html = str_replace("url('\/user\/", "url('./user/", $html);
+
 // Create directory
 if (!is_dir('static_export')) {
     mkdir('static_export');
@@ -30,18 +39,18 @@ if (!is_dir('static_export')) {
 file_put_contents('static_export/index.html', $html);
 
 // Recursive copy function
-function recurse_copy($src, $dst) {
+function recurse_copy($src, $dst)
+{
     $dir = opendir($src);
     if (!is_dir($dst)) {
         mkdir($dst, 0755, true);
     }
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src . '/' . $file) ) {
-                recurse_copy($src . '/' . $file,$dst . '/' . $file);
-            }
-            else {
-                copy($src . '/' . $file,$dst . '/' . $file);
+    while (false !== ($file = readdir($dir))) {
+        if (($file != '.') && ($file != '..')) {
+            if (is_dir($src . '/' . $file)) {
+                recurse_copy($src . '/' . $file, $dst . '/' . $file);
+            } else {
+                copy($src . '/' . $file, $dst . '/' . $file);
             }
         }
     }
