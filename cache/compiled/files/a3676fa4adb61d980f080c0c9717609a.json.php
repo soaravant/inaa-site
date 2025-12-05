@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledJsonFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/data/flex/indexes/pages.json',
-    'modified' => 1764939377,
+    'modified' => 1764939826,
     'size' => 6929,
     'data' => [
         'version' => '1.5',
