@@ -57,12 +57,13 @@ function recurse_copy($src, $dst)
     closedir($dir);
 }
 
-echo "Copying user directory...\n";
-recurse_copy('user', 'static_export/user');
-echo "Copying assets directory...\n";
-recurse_copy('assets', 'static_export/assets');
-echo "Copying images directory...\n";
-recurse_copy('images', 'static_export/images');
+// Copy entire directories
+if (is_dir('user'))
+    recurse_copy('user', 'static_export/user');
+if (is_dir('assets'))
+    recurse_copy('assets', 'static_export/assets');
+if (is_dir('images'))
+    recurse_copy('images', 'static_export/images');
 
 echo "Export complete.\n";
 ?>
