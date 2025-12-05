@@ -33,6 +33,23 @@ body.has-sticky-nav #g-navigation {
 }
 
 /* Φωτογραφίες carousel */
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Sticky Header */
+#g-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  /* Ensure visibility */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Optional shadow for separation */
+  width: 100%;
+}
+
 .drastiriotites-carousel {
   position: relative;
 }
