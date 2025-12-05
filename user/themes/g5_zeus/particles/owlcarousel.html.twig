@@ -14,9 +14,17 @@
         </div>
     </div>
 
+
 {% endblock %}
 
 {% block javascript_footer %}
+    {# Lightbox HTML Structure (injected dynamically or here) #}
+    {# We place it outside the main container to avoid overflow issues #}
+    <div id="custom-lightbox" class="custom-lightbox">
+        <button id="lightbox-close" class="lightbox-close">&times;</button>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Full Screen User Image">
+    </div>
+
     <script type="text/javascript">
         (function() {
             var carouselId = 'g-custom-carousel-{{ id }}';
@@ -26,6 +34,11 @@
             var track = wrapper.querySelector('.custom-carousel-track');
             var prevBtn = wrapper.querySelector('.prev');
             var nextBtn = wrapper.querySelector('.next');
+            
+            // Lightbox Elements
+            var lightbox = document.getElementById('custom-lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            var lightboxClose = document.getElementById('lightbox-close');
 
             // Collect items data
             var items = [
@@ -55,9 +68,6 @@
             var allItems = clonesBefore.concat(items).concat(clonesAfter);
             
             // State
-            // Index 0 corresponds to the first REAL item.
-            // The track has 'CLONE_COUNT' clones at the start.
-            // So the initial offset index is 'CLONE_COUNT'.
             var offsetIndex = CLONE_COUNT; 
             var isAnimating = false;
             
@@ -99,6 +109,11 @@
                 itemDiv.appendChild(imgDiv);
                 itemDiv.appendChild(contentDiv);
                 
+                // Add Click Listener for Lightbox
+                itemDiv.addEventListener('click', function() {
+                    openLightbox(data.image);
+                });
+                
                 return itemDiv;
             }
 
@@ -136,9 +151,7 @@
                 updateTransform(true);
                 
                 setTimeout(function() {
-                    // Check if we reached the end clones
                     if (offsetIndex >= CLONE_COUNT + totalItems) {
-                        // Jump back to start of real items
                         offsetIndex = CLONE_COUNT;
                         updateTransform(false);
                     }
@@ -154,17 +167,7 @@
                 updateTransform(true);
                 
                 setTimeout(function() {
-                    // Check if we reached the start clones
                     if (offsetIndex < CLONE_COUNT) {
-                        // Jump to end of real items
-                        // We are at index CLONE_COUNT - 1 (last item of before-clones)
-                        // This corresponds to last real item: (CLONE_COUNT + totalItems - 1)
-                        // But wait, if we are at offset CLONE_COUNT - 1, we are technically safely valid?
-                        // Yes, but we want to reset to the main list for infinite scroll.
-                        
-                        // If offsetIndex drops below CLONE_COUNT
-                        // It means we are in the left buffer.
-                        // We must jump to: offsetIndex + totalItems
                         offsetIndex = offsetIndex + totalItems;
                         updateTransform(false);
                     }
@@ -182,6 +185,34 @@
                 resizeTimeout = setTimeout(function() {
                     updateLayout();
                 }, 100);
+            });
+
+            // --- Lightbox Logic ---
+            function openLightbox(src) {
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Lock text scrolling
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            lightboxClose.addEventListener('click', closeLightbox);
+            
+            // Close on background click
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
             });
 
         })();
