@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/plugins/error/blueprints.yaml',
-    'modified' => 1632129552,
+    'modified' => 1764939253,
     'size' => 769,
     'data' => [
         'name' => 'Error',

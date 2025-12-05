@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/plugins/flex-objects/blueprints/flex-objects/pages.yaml',
-    'modified' => 1730078100,
+    'modified' => 1764939253,
     'size' => 523,
     'data' => [
         'title' => 'Pages (Admin)',

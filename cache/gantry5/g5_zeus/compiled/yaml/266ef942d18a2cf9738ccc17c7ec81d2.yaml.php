@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/data/gantry5/themes/g5_zeus/config/home/assignments.yaml',
-    'modified' => 1600989834,
+    'modified' => 1764939253,
     'data' => [
         'page' => [
             0 => [

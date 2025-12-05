@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/config/site.yaml',
-    'modified' => 1602583354,
+    'modified' => 1764939253,
     'size' => 438,
     'data' => [
         'title' => 'Κατηχητικά Σχολεία Ι.Ν. Αγ. Αλεξάνδρου Π. Φαλήρου',

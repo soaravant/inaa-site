@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/config/plugins/gantry5.yaml',
-    'modified' => 1602586004,
+    'modified' => 1764939253,
     'size' => 179,
     'data' => [
         'enabled' => true,

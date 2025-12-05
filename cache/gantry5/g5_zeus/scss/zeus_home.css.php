@@ -1,8 +1,8 @@
 <?php
 return [
     'file' => 'gantry-theme://css-compiled/zeus_home.css',
-    'timestamp' => 1764937202,
-    'md5' => '0378b734c859cbbef267d81014fd0d04',
+    'timestamp' => 1764939790,
+    'md5' => '651fd3ec4f930d379475b1648de698c5',
     'variables' => [
         'above-section-preset' => '\'disabled\'',
         'above-text-color' => '#212121',

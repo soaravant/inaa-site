@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/themes/g5_zeus/particles/bloglayoutSZ.yaml',
-    'modified' => 1544979752,
+    'modified' => 1764939253,
     'data' => [
         'name' => 'Blog layout',
         'description' => 'Display Joomla Articles in various layouts.',

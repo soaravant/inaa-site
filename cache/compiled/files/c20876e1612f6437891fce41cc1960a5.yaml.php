@@ -2,7 +2,7 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/plugins/shortcode-core/shortcode-core.yaml',
-    'modified' => 1736134086,
+    'modified' => 1764939253,
     'size' => 355,
     'data' => [
         'enabled' => true,

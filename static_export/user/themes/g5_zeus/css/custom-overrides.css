@@ -33,6 +33,28 @@ body.has-sticky-nav #g-navigation {
 }
 
 /* Φωτογραφίες carousel */
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Sticky Header Fix */
+#g-page-surround {
+  overflow: visible !important;
+}
+
+/* Sticky Header */
+#g-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  /* Ensure visibility */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Optional shadow for separation */
+  width: 100%;
+}
+
 .drastiriotites-carousel {
   position: relative;
 }
@@ -211,7 +233,7 @@ body.has-sticky-nav #g-navigation {
   height: 400px;
   position: relative;
   overflow: hidden;
-  transition: flex-grow 0.4s ease, filter 0.4s ease;
+  transition: flex-grow 0.4s ease, flex-basis 0.4s ease, filter 0.4s ease;
   cursor: pointer;
 
   /* Tilted Edge Effect */
@@ -358,4 +380,36 @@ body.has-sticky-nav #g-navigation {
   /* We need to update JS visibleItems for mobile to make this work perfectly,
        but for now this CSS ensures it doesn't look broken.
     */
+}
+
+/* --- Final Carousel Fixes --- */
+.custom-carousel-wrapper {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+/* --- Sticky Header Fixes --- */
+/* Force sticky behavior and ensure z-index */
+#g-navigation {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(255, 255, 255, 0.95);
+  /* Ensure visibility */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix Gantry's overflow: hidden habit which kills sticky */
+body,
+#g-page-surround,
+.g-offcanvas-hide {
+  overflow-y: visible !important;
+  overflow-x: clip !important;
+  /* Modern replacement for hidden that might play nicer, or use visible */
+}
+
+/* Ensure mobile menu doesn't break with overflow changes */
+#g-mobilemenu-container {
+  z-index: 10000 !important;
 }

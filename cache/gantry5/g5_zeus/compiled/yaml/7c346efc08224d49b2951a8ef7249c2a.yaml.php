@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/themes/g5_zeus/blueprints/styles/nadir.yaml',
-    'modified' => 1538655964,
+    'modified' => 1764939253,
     'data' => [
         'name' => 'Nadir Styles',
         'description' => 'Nadir section styles for the Zeus theme',

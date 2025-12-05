@@ -2,7 +2,7 @@
 return [
     '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
     'filename' => '/Users/sotiris/Downloads/default_site_backup--20250926220607/user/themes/g5_zeus/blueprints/styles/navtop.yaml',
-    'modified' => 1538656226,
+    'modified' => 1764939253,
     'data' => [
         'name' => 'Navtop Styles',
         'description' => 'Navtop section styles for the Zeus theme',
