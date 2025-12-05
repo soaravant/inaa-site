@@ -211,7 +211,7 @@ body.has-sticky-nav #g-navigation {
   height: 400px;
   position: relative;
   overflow: hidden;
-  transition: flex-grow 0.4s ease, filter 0.4s ease;
+  transition: flex-grow 0.4s ease, flex-basis 0.4s ease, filter 0.4s ease;
   cursor: pointer;
 
   /* Tilted Edge Effect */
